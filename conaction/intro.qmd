@@ -1,0 +1,132 @@
+# Introduction
+
+## Complexity
+
+Defining "complexity" can seem ironic because it turns out to be a 'complex' endeavour. But in this section we will attempt to explain some of its character, and why it is a challenge in the sciences. The complexity of a system generally comes from a combination of two sources: the system's state and the system's state transition rules.\\
+
+Formal systems are structures like sets, sequences, vectors, scalars, matrices, tensors, graphs, hypergraphs, or any of a myriad of algebraic structures or spaces. In the simple case of a set as a system, one can think of the elements of the set as its state along with some rules for changing the elements of the set. Two contrasting examples of formal systems are cellular automata and systems of diffrential equations.\\
+
+Figure \ref{fig:statetransitionexample} (a) shows an elementary (1-dimensional) cellular automata known as Rule 110. In such a system the entire state of the system is represented as a one-hot vector (i.e. a vector of zeros and ones). In such a system time can be thought of discretely as a count of the number of applications of the rules, which are applied simultaneously on the current state of the system to get the next state. The state transition rules dictate how a given bit is replaced with another depending on its value as well as the values of its left and right neighbours.  It is possible *prima facie* to believe that such systems are only capable of the simplest of patterns based on the belief that simple rules imply simple behaviour. But this is not so. In 2004 Mathew Cook published a proof that Rule 110 is Turing complete (@cook2004), i.e. equivalent to a Turing machine, a classification indicating that Rule 110 can run any program depending on the size and configuration of its input.\footnote{A system would have to be infinitely-large to be Turing complete. If Rule 110 elementary automata were given an infinitely-large input this would be apt, however it still speaks to the ability of a system to represent complex patterns if it is a finite approximation to a Turing machine.} As a practical point of comparison, a phone or a PC can be entirely represented by a Turing machine. This includes everything from playing your favourite music or video, playing the latest computer games, calling a friend, running advanced scientific simulations, and even representing the entirety of whatever the Internet is doing right at this moment. Thus complexity really **can** come from simple rules with a suitable system configuration.
+
+Stephen Wolfram has argued that some systems, including those with simple rules and relatively small state spaces, can still be what he calls "\textit{computationally irreducible}"(@wolfram2002). Computational irreducibility is the notion that there exists formal systems in which, even with the current state and the state transition rules on hand, there does not exist a more efficient way of knowing the future state than to run the complete sequence of iterations of the rules. Fortunately, if we consider a well-defined state with state transitions rules at time $t$, we can always (within the practicalities of computation on real computers) compute what the state will be at time $t+\tau$ by iteratively applying the transition rules $\tau$ number of times. Less fortunately, there are systems that have undecidable problems in the sense that they cannot be answered in a finite number of steps.
+
+Discrete (countable) systems are not the only types of formal systems that can be characterized by a current state combined with state transition rules, leading us to the notion of differential equations.
+
+\begin{figure}[H]
+	\begin{center}
+	\begin{tabular}{cc}
+	(a) & (b) \\
+		\includegraphics[scale=0.2]{rule110.png} & \includegraphics[scale=0.2]{lorenzsystem.png}  \\
+		\ccPublicDomain\ Public Domain & \ccPublicDomain\ Public Domain \\
+		\small $\{(1,1,1), (1,0,0), (0,0,0)\} \mapsto 0$ & $\frac{dx}{dt} = \sigma (y-x)$ \\
+		\small $\{(1,1,0), (1,0,1), (0,1,1), (0,1,0), (0,0,1)\} \mapsto 1$ & $\frac{dy}{dt} =x (\rho - z) - y$ \\
+		 & $\frac{dz}{dt} = xy - \beta z$ \\
+	\end{tabular}
+	\end{center}
+	\caption{Examples of systems with a well-defined state with state transition rules. (a) Rule 110 elementary cellular automata. (b) Lorenz dynamical system.}
+	\label{fig:statetransitionexample}
+\end{figure}
+
+Figure \ref{fig:statetransitionexample} (b) shows the Lorenz system, which is a system of differential equations in 3 dimensions that was originally inspired by weather models \cite{Lorenz1963}. A *dynamical system* has a formal definition, but we will treat it informally here as a system that evolves with time according to differential equations. Like the example with elementary cellular automata, there is a well-defined state at any given point in time. But unlike these discrete state space systems, the Lorenz system has a continuous state space. This has the non-intuitive consequence that there is no "next state", however a collection of governing equations prescribe how the system evolves through the space of states. The Lorenz system exhibits a different notion of complexity: chaos. Chaos can informally be defined as the state of the system at some future time being highly sensitive to the initial conditions that the system began with, however this may understate the severity of the sensitivity. There exists systems for which *any* finite precision in the measurements of the state of the system will eventually be insufficient to predict future states after a finite amount of time. This is not the same thing as randomness *per se* because the underlying dynamics are deterministic. Rather this is extrinsic randomness due to not knowing the state of the system in enough detail.\footnote{The only systems that might be intrinsically random are those described by wave functions in quantum mechanics, however even this inference has doubts that have been raised by @Hossenfelder2020a, @Hossenfelder2020b, and @Hooft2014.}
+
+While we often model natural systems using formal systems, they are not synonymous. Therefore it worth exemplifying some natural systems. We will describe some natural systems in which complexity makes scientific progress difficult.
+
+A human brain is an immensely complex organ whose state transitions are measure dependent with human decision making and behaviour. It contains roughly 85 billion neuron cells (@Azevedo2009), and some believe it has $\sim 10^{15}$ connections between them (@DeWeerdt2019).  The brain seems to function via electrical-chemical signals that travel along and between neurons, but with such large numbers of components involved it is difficult to determine precisely what any selection of neurons is actually doing.
+
+There exists some 25 thousand genes in the human genome. While this number is quite modest compared to the number of neurons in the human brain, the behaviour of the human genome as a whole is still an ongoing area of research. Molecular biologists and biochemists have had immense success in mapping certain genes to biological functions, and it has helped considerably that genes code for RNA and proteins that can be studied for structure-related function. Molecular components of gene regulatory networks work via chemical diffusion. A consequence of molecules travelling via chemical diffusion is that they go everywhere within their cellular compartment and sometimes beyond. This is especially the case when other mechanisms of transport such as channel protein transport and active transport proteins play a role.  It can still be difficult to predict what a given gene regulatory network will do in a cell because of unforeseen chemical interactions (@Karkaria2020).
+
+What is true of both formal and natural systems is that complexity arises from a combination of its state at some time and the state transition rules. Even if a system is deterministic, we may not have precise enough measurements, there are likely to be missing variables, and some problems are undecidable. Often our empirical measurements do not capture the whole state of the system, but rather represent statistical data about the system.
+
+ For example, temperature measurements sample some aggregate quantity of molecules with varying kinetic energy.\footnote{In thermodynamics, temperature is formally defined as $T$ in the equality $\frac{1}{T} = \frac{\partial S}{\partial E}$ where $S$ is the system's entropy and $E$ is the system's internal energy. The change in internal energy, $\partial E$, can come in the form of heat. Heat is related to exchange of kinetic energy of particles through random thermal motion.} Likewise with the brain, scanning technologies such as functional magnetic resonance imaging and positron emission tomography allow us to understand aggregate behaviours of neurons in terms of *regions* of the brain.
+
+ This motivates the need for mathematical models to yield insights about systems for which we do not know how to measure in precise totality. Indeed, the need for such models may be an indication that we are dealing with the current limits of our understanding. We will delve into rigorous thinking on new mathematical models of this type in later sections, but in the next section we wish to point to something of great imprecision and importance in our experience of living in a complex world: the Trinity of Covariation.
+
+## The Trinity of Covariation
+
+In the analysis of data we look for how observables vary on their own, and how they vary together. Figure \ref{fig:dancing} offers a metaphor for this by relating dancers to variables. In univariate statistics we are concerned with how a single variable changes or distributes on its own. In bivariate statistics we are concerned with how pairs of variables covary. Likewise, for any number of putatively dependent variables we can consider how they covary, which is one of the goals of multivariate statistics.
+
+\begin{figure}[H]
+		\begin{center}
+			\begin{tabular}{ccc}
+			(a) & (b) & (c) \\
+			\includegraphics[scale=0.65]{singledancer.jpg} & \includegraphics[scale=0.13]{twodancers.jpeg} & \includegraphics[scale=0.181]{threedancers.jpg} \\
+	\tiny \href{https://en.wikipedia.org/wiki/File:Nandini\_Ghosal.jpg}{CC-BY-SA-2.0} & \tiny \href{https://en.wikipedia.org/wiki/File:NutcrackerSnowPas.JPG}{CC-BY-SA-4.0} & \tiny \href{https://en.wikipedia.org/wiki/File:Irish\_dancers\_in\_team\_costume,\_Davis\_Academy,\_USA.jpg}{\ccPublicDomain\ Public Domain} \\
+	\tiny  \href{https://www.flickr.com/people/43518209@N00}{Bala Sivakumar} & \tiny \href{https://en.wikipedia.org/wiki/User:Lambtron}{Jim Lamberson $|$ Wikimedia Commons} &  \\
+			\end{tabular}
+		\end{center}
+	\caption{'Dancing variables' is a metaphor relating statistical variables to dancers. (a) A single dancer as a univariate system. (b) Two dancers as a bivariate system. (c) Three dancers as a trivariate system.}
+	\label{fig:dancing}
+\end{figure}
+
+The notion that coordinated change in structures is of interest is older than modern statistics. For example, the philosohpher John Stuart Mill spoke of the importance of coordinated change in his thinking on causality \cite{Mill1843}. This is similar to Reichenbach's common cause principle which states that if  two events $A$ and $B$ hold the relation $P(A \cap B) > P(A)P(B)$ and yet neither causes the other, then there exists a common cause $C$ such that $A$ and $B$ are conditionally independent on $C$ (@Hitchcock2021).\footnote{This notion of causality is \textit{prima facie} incomplete, but it can be improved by considering the two sources of complexity we mentioned earlier in this chapter: the configuration of the state of the system and the state transition rules. Suppose there exists a universe similar to ours in its rules, but began at $t=0$ with only two electrons positioned billions of light years away from each other. Because electromagnetic and gravitational effects propogate at the speed of light, there would be no physical interaction between these particles for a long time. Now suppose that the particles' velocities are exactly in the same direction, and will remain constant in the absence of external forces according to Newton's laws. This entails that their positions as a function of time are perfectly positively correlated depsite the absence physical interaction. What precisely is causal about such a circumstance? Consider that we do not get hit the face with base balls just because the laws of physics are what they are. Rather we (sometimes) get hit in the face with base balls because the laws of physics are what they are \textbf{and} the (rather unfortunate) initial conditions and boundary conditions are what they are. In terms of the original pair of electrons in an empty universe, the initial conditions that we supposed are also the cause of the resulting correlation.}
+
+::: {#fig-john-stuart-mill layout-ncol=2}
+
+![John Stuart Mill (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/7/78/Stuart_Mill_G_F_Watts.jpg)
+
+> **Quotation** (@Mill1843)
+>
+> Whatever phenomenon varies in any manner whenever another phenomenon varies in some particular manner, is either a cause or an effect of that phenomenon, or is connected with it through some fact of causation.
+
+Portrait of John Stuart Mill and a quote from his work on causal inference and reasoning.
+:::
+
+
+Perhaps the notion of coordinated change in structures is even older than recorded history. Humans and other animals are capable of learning via operant conditioning, which involves an association of a \textit{stimulus} (i.e. a change) with a reward/punishment (i.e. another change) (@Houwer2018). While learning this way is very general, it can lead to false pattern recognition in the form of apophenia including pareidolia, and agenticity. This establishes a precedent of coordinated changes in structures being an old, if not ancient, notion.
+
+A metaphor can be based on this possibly-ancient notion which can be used as a muse for developing more precise mathematical and software tools. But first we would like to highlight both the challenges and potential of using metaphors as a starting point for idea generation.
+
+A quote that nicely captures one of the concerns of metaphor-driven idea generation was stated by Eric Weinstein speaking to Roger Penrose on the mathematical foundations of modern physics \cite{Weinstein2020}.\\
+
+\begin{figure}
+
+\begin{tcolorbox}[title={Quotation}]
+\textit{"[M]athematics makes you pay for every attempt to [...] intuitively encode something that isn't precise."}
+
+\hspace*{\fill}{- Dr. Eric Weinstein to Sir Roger Penrose, \textit{The Portal} \cite{Weinstein2020}.}
+\end{tcolorbox}
+
+\caption{Quote by Dr. Eric Weinstein to Sir Roger Penrose about the difficulties in turning imprecise notions into precise mathematics.}
+
+\end{figure}
+
+One of the ways in which this quote captures the challenge of using metaphors to inspire mathematical ideas is that metaphors are often ambiguous. They often have multiple interpretations, thus making any persuits of a unique instantiation of a metaphor to be na\"ive. However, this property can be used as a `feature' rather than a `bug' of idea generation. Based on Figure \ref{fig:exampleinstantiations}, consider that numerous imprecise notions such as "probability"\footnote{Probability is precise in the sense of Kolmogorov's axioms of probability, based on measure theory. What remains ambiguous is what such mathematical measures mean in terms of empirical data, which has led to frequentist and Bayesian interpretations of these quantities.}, "network centrality", "central tendency", and "change" have multiple instantiations. In the case of network centrality measures there are far more of them than would fit in Figure \ref{fig:exampleinstantiations}. Rather than being concerned about finding a multiplicity of interpretations, we suggest exploiting them for different use cases.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.45]{muse_top.pdf} \\
+		\includegraphics[scale=0.42]{muse_bottom.pdf}
+	\end{center}
+	\caption{Examples of notions that are not uniquely encoded into mathematical formalisms: probability, network centrality, central tendency (of a distribution), and change.}
+	\label{fig:exampleinstantiations}
+\end{figure}
+
+Motivated by the historical existence of a notion of coordinated change in structures, and expecting some multiplicity of interpretations, here is a simple metaphor: The Trinity of Covariation (Figure \ref{fig:trinityofcovariation}).
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[grow cyclic, every node/.style=concept,  concept color=UNBCGold, text width=2.1cm, text=white, align=flush center,
+	level 1/.style={level distance=3cm,sibling angle=120, concept color=UNBCGreen},
+	level 2/.style={level distance=0.5cm,sibling angle=45}]
+
+			\node{Covariation}
+				child {node {Change}}
+				child {node {Structure}}
+				child {node {Coordination}}
+				;
+		\end{tikzpicture}
+	\end{center}
+	\caption{\textit{The Trinity of Covariation} is a metaphor for creatively exploring our intuitive notions of "\textit{covariation}" as "\textit{coordinated changes in structure}".}
+	\label{fig:trinityofcovariation}
+\end{figure}
+
+Reflecting on the metaphor, "covariation" as "coordinated changes in structure" can be used as a tool for creative thinking. In relation to this metaphor, the following questions can be considered when doing open-ended idea generation:
+
+\begin{itemize}
+	\item In what sense might something be thought of as 'coordinated'?
+	\item In what sense might something be thought of as a 'structure'?
+	\item In what sense might something be thought of as 'change'?
+\end{itemize}
+
+
+In this chapter a frame of thinking was introduced in the form of a metaphor, and from it we wish to define more precise notions that help us understand complex systems. The coming chapters discuss both new and existing instances of this metaphor.

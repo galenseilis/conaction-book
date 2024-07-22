@@ -1,0 +1,220 @@
+# ConAction
+
+We believe that the mathematical functions developed in this thesis are far more likely to be used if there exists a software package that implements them. This is the purpose of ConAction\footnote{The name of this package was motivated by the prefix \textit{con-} being taken to mean "with" or "together", and *action* being a verb that entails change. Thus *ConAction* is an allusion to the Trinity of Covariation.}, a Python package we developed as part of this thesis. We chose the Python programming language for its rapid development times, package management system, mathematical libraries, portability, and support for performance and feature enhancements. In this package the user will find tools for computing instances of the Trinity of Covariation on data matrices, numerically on Python functions, or symbolically on computer algebra expressions. This diversity of implementations facilitates ConAction being useful to both theoreticians and practitioners.
+
+In this chapter we cover the installation of ConAction, its dependencies, the main features, our testing approach, the algorithmic complexity of the implemented algorithms, some run time performance analysis, our approach to documentation of ConAction, and our plans for future support.
+
+## Installation
+
+In order to reduce the technical skills required to set up ConAction, it must be easy to install. This is really important because many users give up on using a package if it requires considerable configuration. We also wanted the installation process to be the same on any platform. For these reasons, we use the Python package management system known as Pip. Pip makes it easy to install packages from the Python Package Index (@pypi). Figure \ref{fig:installation} shows how ConAction can be installed with a single command.
+
+\begin{figure}[H]
+\SU{user=user,host=ubuntu,color=lime}
+\begin{ubuntu}
+pip install conaction `\StartConsole`
+Collecting conaction
+  Using cached conaction-<Version Number>-py3-none-any.whl (<Package Size>)
+Installing collected packages: conaction
+Successfully installed conaction-<Version Number> `\SU{root}`
+\end{ubuntu}
+\caption{Example installation of ConAction on a Ubuntu system using PIP, a popular package manager tool for Python.}
+\label{fig:installation}
+\end{figure}
+
+Because Pip is available on MacOS, Windows, and various distributions of Linux, the command given in Figure \ref{fig:installation} can be run on practically any desktop. Thus this approach to installation is simple to perform and cross-platform.
+
+## Dependencies
+
+ConAction has dependencies in order to avoid reinventing solutions to solved problems, and to reduce development time. The main submodules of ConAction and their dependencies are given in Figure \ref{fig:dep_tree}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{./dependency_tree/Digraph.gv.pdf}
+\caption{Dependencies of the ConAction package. Ellipses are submodules of the ConAction package, and rectangles are third party libraries. Two nodes share an arc if the tail node is required by the head node.}
+\label{fig:dep_tree}
+\end{figure}
+
+The supported submodules `numparam`, `estimators`, `sampling`, and `symparam` all depend upon `numpy` for either numerical and/or array operations. The `scipy` package provides the singular values of a correlation matrix and integration techniques in `numparam` as well as data ranking functions `estimators`. The `tqdm` package provides progress bars for some of the functions found in `estimators` and `sampling` that potentially take a long time. The `pathos` package is used for in `numparam` and `estimators` to parallelize certain loops (@McKerns2010). We preferred the `pathos` package over the `multiprocessing` package in the standard Python library because it uses `dill` instead of `pickle` to serialize objects, and `dill` covers a wider range of cases including nested functions (@McKerns2011). The `networkx` package is used in computing grade entropies by providing graph algorithms and data structures related to the lattice representation of a partial order.
+
+## Features by Module
+The ConAction package is organized into multiple sub-modules to support different features (Figure \ref{fig:conactionmodules}). The same function names are used for a given mathematical function in different modules to make it easier for users to remember which command they want. But this also means that users of ConAction must also adhere quite strictly to the instructions in the Python Enhancement Proposal version 8 (PEP8) to avoid wildcard imports of the form `from <module> import *` because names can be overwritten in the namespace (@Rossum2001). Rather we intend for users to import a submodule of ConAction, and use dot notation to specify the function they wish to use.
+
+\begin{figure}[H]
+	\smartdiagramset{
+    set color list={UNBCGreen, UNBCGreen, UNBCGreen, UNBCGreen},
+    description title text width={1cm},
+    description title width={1cm},
+    descriptive items y sep={1.5cm},
+    description text width={9cm},
+}
+	\centering
+	\smartdiagram[descriptive diagram]{
+  {\tiny estimators, {Statistical estimators on data matrices.}},
+  {\tiny numparam, {Numerical integration and differentiation methods.}},
+  {\tiny symparam, {Symbolic integration and differentiation methods.}},
+  {\tiny sampling, {Statistical sampling and search functions.}},
+  }
+  \caption{The sub-modules of the ConAction package that partition different features.}
+  \label{fig:conactionmodules}
+\end{figure}
+
+The `estimators` module contains many of the functions that can be computed on data matrices (i.e. tabular data), and thus can be thought of as statistical estimators for most intents and purposes. Table \ref{tab:conactionfunctions} is a summary of the available functions in this submodule.
+
+
+\begin{table}[H]
+	\centering
+	\caption{Functions featured in the three main modules of the ConAction package.}
+	\scriptsize
+	\begin{tabular}{llccc}
+	\hline
+	Function & Command & \texttt{estimators} & \texttt{numparam} & \texttt{symparam} \\
+	\hline
+	Mean & \texttt{mean} & \cmark & \cmark & \cmark \\
+	Nightingale deviation & \texttt{nightingale\_deviation} & \cmark & \cmark & \cmark \\
+	Nightingale covariance & \texttt{nightingale\_covariance} & \cmark & \cmark & \cmark \\
+	Nightingale correlation & \texttt{nightingale\_correlation} & \cmark & \cmark & \cmark \\
+	Standard deviation & \texttt{standard\_deviation} & \cmark & \cmark & \cmark  \\
+	Multilinear covariance & \texttt{covariance} & \cmark & \cmark & \cmark  \\
+	Multilinear Pearson correlation & \texttt{pearson\_correlation} & \cmark & \cmark & \cmark  \\
+	Multilinear reflective correlation & \texttt{reflective\_correlation} & \cmark & \cmark & \cmark  \\
+	Multilinear circular correlation & \texttt{circular\_correlation} & \cmark & \cmark & \cmark  \\
+	Multilinear signum correlation & \texttt{signum\_correlation} & \cmark & \cmark & \cmark  \\
+	Misiak correlation & \texttt{misiak\_correlation} & \cmark & \cmark & \cmark  \\
+	Tren\v{c}evski-Mal\v{c}eski correlation & \texttt{trencevski\_malceski\_correlation} & \cmark & \cmark & \cmark  \\
+	Partial Agnesian & \texttt{partial\_agnesian} & \cmark$^\dagger$ & \cmark & \cmark  \\
+	Partial Multiagnesian & \texttt{partial\_multiagnesian} & \xmark & \cmark & \cmark  \\
+	Grade Entropy & \texttt{grade\_entropy} & \cmark$^\ddag$ & \xmark & \xmark \\
+	Pseudograde Entropy & \texttt{pseudograde\_entropy} & \cmark$^\ddag$ & \xmark & \xmark \\
+	\hline
+	$\dagger$ Non-negative order only. \\
+	$\ddag$ Strict product order only. \\
+	\end{tabular}
+	\label{tab:conactionfunctions}
+\end{table}
+
+The example in Figure \ref{code:estimatorexample} shows how the multilinear Pearson correlation coefficient can be estimated from data. Any of the functions in Table \ref{tab:conactionfunctions} can be called in a similar fashion. \\
+
+ 
+\begin{figure}[H]
+\tiny
+\centering
+\includegraphics[scale=0.8]{./code_example_boxes/estimators/estimator_example.pdf}
+\caption{Code example of how to estimate multilinear Pearson correlation using the \texttt{estimators} submodule.}
+\label{code:estimatorexample}
+\end{figure}
+
+The `numparam` submodule contains similar functions to `estimators`, but the purpose and scope differs. While `estimators` contains estimators to be computed on data matrices, whereas `numparam` submodule assumes that a mathematical *function* is known and that numerical integration of the function is desired.
+
+\begin{figure}[H]
+\tiny
+\centering
+\includegraphics[scale=0.8]{./code_example_boxes/numparam/numparam_example.pdf}
+\caption{Code example of how to estimate multilinear Pearson correlation using the \texttt{numparam} submodule.}
+\label{code:numparamexample}
+\end{figure}
+
+The \texttt{symparam} submodule is most similar to the \texttt{numparam} submodule in its scope. But rather than numerically integrating the statistic as is done in \texttt{numparam}, \texttt{symparam} computes the integrals symbolically.
+
+\begin{figure}[H]
+\tiny
+\centering
+\includegraphics[scale=0.8]{./code_example_boxes/symparam/symparam_example.pdf}
+\caption{Code example of how to estimate multilinear Pearson correlation using \texttt{symparam} submodule.}
+\label{code:numparamexample}
+\end{figure}
+
+At this time both \texttt{numparam} and \texttt{symparam} assumes a uniform probability measure, however future development will look at allowing user-specified probability measures.\\
+
+The \texttt{sampling} module allows contains resampling methods used in Chapter \ref{chap:mtnpinebeetle}.\\
+
+Next we will consider how ConAction has been tested.
+
+## Testing
+
+Software testing is an important part of ensuring software quality. Due to the mathematically precise nature of the features of ConAction, it is readily testable by setting up function inputs and checking whether the correct (usually numerical) output is obtained.
+
+The Python standard library includes the `doctest` module which served as the primary mode of testing this first release of ConAction. Every function in the Conaction code base has a docstring under the function name, including an example input and output. The `doctest` module can be imported, and running `doctest.testmod()` function will go through every such example for every function to check if the correct output is given.
+
+As unforeseen cases are found by users, this will require further testing outside the scope of the examples used in the documentation strings. Future testing will make use of the `unittest` module which is built-in to the standard Python library to perform unit tests.
+
+Thus ConAction has undergone basic testing to ensure a minimal viable product, but can be further tested when unforeseen cases arise.
+
+## Algorithmic Complexity
+
+In this section we will overview the theoretical scalability of the algorithms implemented in ConAction.
+
+### Estimators
+The \texttt{estimators} submodule has numerous functions that compute expectation operators. When computed on a sample, we took any expectation $\mathbb{E}[U]$ of a random variable $U$ to be estimated by
+
+$$\bar{u} = \frac{1}{m} \sum_{i=1}^m u_i$$
+
+where $\bar{u}$ is the sample mean of a sample $\{ u_1, \cdots, u_m \}$. Computing such an expectation requires $\mathcal{O}(m)$ time and space, but since this is often computed for each variable in a collection of $n$ random variables the complexity often comes to $\mathcal{O}(mn)$ time. While multilinear correlations and Nightingale's correlation involve more operations than just computing a sample average for each variable, none of them change the resulting complexity when computing using BEDMAS\footnote{Recall that BEDMAS is an abbreviation for "\textbf{b}rackets-then-\textbf{e}xponents-then-\textbf{d}ivision-then-\textbf{m}ultiplication-then-\textbf{a}ddition-then-\textbf{s}ubtraction".} order of operations.\\
+
+In computing the Misiak correlation and Tren\v cevski-Mal\v ceski correlation we always took the inner product to be the dot product when computed in the \texttt{estimators} submodule. Most of the steps of computing these coefficients are also in $\mathcal{O}(mn)$ of time which is due to computing the inner products of all pairs of variables to obtain a Gram matrix. But the overall time complexity will be that of the algorithm used to compute the determinant of the Gram matrix. We used the \texttt{numpy.det} function which computes the determinant using a $\mathcal{O}(n^3)$ algorithm based on performing a LU decomposition.\footnote{A LU decomposition is a matrix factorization of matrix $A$ satisfying $A=LU$ where $L$ is a lower triangular matrix and $U$ is an upper triangular matrix.}\\
+
+Computing the partial Agnesian of non-negative order $k \geq 0$ has a complexity in terms of the sample size $m$, the number of variables $n$ (not inlcuding the parameter $t$), and the order $k$. Instead of computing the partial derivatives \textit{per se}, they are approximated using
+
+$$\frac{\partial x_j(t)}{\partial t} \approx \frac{x_{i,j} - x_{i-1,j}}{t_i - t_{i-1}}$$
+
+where $j \in \{ 1, \cdots, n \}$ and $i \in \{ 1, \cdots, m \}$. It requires $\mathcal{O}(m)$ time to compute this for a single variable, and consequently requires $\mathcal{O}(mn)$ time for all the variables. Repeating this calculation $k$ times suggests that the overall time complexity is $\mathcal{O}(mnk)$.\\
+
+Calculating grade entropy involves comparing each point to each other point, suggesting at least $\mathcal{O}(m^2)$ time complexity is required, to construct a directed acyclic graph (DAG) of which points dominate other points. But since each point has $n$ components to be compared in a componentwise fashion, the time complexity for constructing the DAG is actually $\mathcal{O}(m^2n)$. We then perform a transitive reduction on the constructed DAG to convert it to a lattice of the partial order. \cite{Aho1972} showed that the time complexity of performing a transitive reduction of a DAG requires the same complexity as a matrix multiplication, which we can assume to be somewhat better than $\mathcal{O}(m^3)$ depending on the implmentation. Our implementation of grade entropy uses the \texttt{networkx.transitive\_reduction} function. At first glance the source code for \texttt{networkx.transitive\_reduction} has only two nested for loops, but within the inner loop there exists a set comprehension in place of a third for loop. Next a topological sort is performed, which requires $\mathcal{O}(|V| + |E|)$ where $V$ and $E$ are the vertex and edge sets of the lattice, respectively \cite{Kahn1962}. We know that $|V| = m$ and that $|E| \leq |V \times V| = m^2$, suggesting that we are adding no more than $\mathcal{O}(m^2)$ which is already a factor of $\mathcal{O}(m^2n)$ and is dominated by the $\mathcal{O}(m^3)$ time complexity of computing a transitive reduction. Thus the topological sort in our implementation does not add to the complexity. The remaining steps of looping over the nodes in topological order, counting the distinct grades, and computing the entropy are all linear complexity or dominated by linear complexity, and thus do not change the time complexity in terms of either $m$ or $n$.\\
+
+The algorithm we implemented for computing a pseudograde entropy based on a strict product order has a better time complexity than that of our grade entropy implementation because it does not require performing a transitive reduction. Similarly to grade entropy, every point is compared to each other point in a componentwise fashion giving a $\mathcal{O}(m^2n)$ time complexity in order to occupy an $m \times m$ adjacency matrix. Summing this matrix along one of the index sets provides an array of the pseudogrades of the points. Counting the distinct pseudogrades from this array, normalizing them into probabilities, and computing the entropy all take linear-or-better time and therefore do not further change the complexity.
+
+### NumParam and SymParam
+
+The complexity of the functions computed in `numparam` and `symparam` are more difficult to consider than those in the `estimator` module because (possibly non-constant) functions are considered rather than a data matrix.
+
+Each function scales linearly in the number of functions it takes as input just as its counterpart in the `estimators` submodule scales linearly in the number of variables. But since we are no longer considering a sample of size $m$ but rather a collection of functions either at a point or over an interval, the scalability in terms of $m$ does not apply. In the case of the Agnesian operators, both differentiation and integration are considered whereas the various correlation coefficients all require integration.
+
+We refer the interested reader to `scipy.integrate.quad` in the SciPy documentation for further reading of how the integration in `numparam` works, and to the the SymPy documentation for information about how integrals are symbolically computed in `symparam`.
+
+
+## Performance
+
+Run time performance tests were used to ensure that (1) the code ran in a reasonable amount of time, and (2) compare to a pure Python implementation that we called "naïve" in that it did not utilize certain optimization strategies. Putting aside the choice of algorithm, there were two main approaches we took to implementing functions in ConAction to improve the run time performance.
+
+The first was to avoid dynamic typing when it is safe to assume static types. This is exemplified by Figure \ref{fig:intextperformance}(a) where the multilinear correlation coefficient was computed on increasing sample sizes with either dynamic typing (`naive.py`) or static typing (`estimators.py`). Using static typing can provide an order of magnitude or more improvement in rune times, which is used heavily as a strategy for improving the performance of functions in \texttt{estimators}.
+
+The second strategy to improve performance was to parellelize any nested loops. We chose not to parallelize every function because many of them would run slower due to the process (i.e. thread) management overhead. In the case of the `pseudograde_entropy` there exists a nested for loop, and parallelizing the inner loop had a marked improvement in performance for large input sizes. Figure \ref{fig:intextperformance}(b) illustrates two effects of changing the number of threads working on computing the pseudograde entropy using the \texttt{pseudograde\_entropy} function. The first effect is that there is increasing overhead as the number of threads increases, which is most evident for the smaller sample sizes where using fewer threads was actually faster. The second effect is the improved scalability of using more threads, which can be inferred from Figure \ref{fig:intextperformance}(b) by noticing that using 64 threads gave a nearly flat response to increasing the sample size up to $10^4$ from $2$ whereas using 1 or 2 threads had a noticable increase in runtime by an order of magnitude.
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+	(a) & (b) \\
+ \includegraphics[scale=0.45]{./performance_tests/est_vs_naive_runtime_pearson_correlation_8_10000.pdf} & \includegraphics[scale=0.45]{./performance_tests/est_vs_naive_runtime_grade_entropy_8_10000.pdf} \\
+	\end{tabular}
+	\caption{Example run time performance tests showing time requirements of computing statistics at increasing sample size. 'Na\"ive' implementation run times are plotted to compare performance. (a) Multilinear Pearson correlation coefficient computed on 8 Gaussian variables. (b) Pseudograde entropy under a strict product order on 8 Gaussian variables. Non-na\"ive computations were tested using 1, 2, and 64 threads.}
+	\label{fig:intextperformance}
+\end{figure}
+
+Other minor improvements were made in the implementation. For example, multilinear correlation coefficients and Nightingale's correlation coefficient involve computing $n$th roots in their denominator, which were computed only once by taking advantage of the distributive property of multiplication that entails $\sqrt[n]{\prod_{j=1}^n x_j} = \prod_{j=1}^n \sqrt[n]{x_j}$. This does not affect the algorithmic complexity classes these functions have as the sample size or number of variables increases, but it is expected to slightly improve run time and numerical precision.
+
+There are also optional ways to improve the performance of ConAction either by using auxillary packages or by changing the data type of the input data.
+
+Because the \texttt{estimators} makes heavy use of the NumPy package, we can use the Numba package which is designed to interroperate with NumPy to increase its performance. Numba provides options for parallelism, just-in-time compiling, and ahead-of-time compiling. Numba is not a dependency for ConAction because at the time of writing the latest version of Numba was not compatible with the latest version of NumPy under Python 3.10, but this may change in the future.
+
+We can also make some adjustments for when the input data matrix is very large and/or sparse. The \texttt{numpy.memoryview} function can be used to create a virtual memory representation of an array that can be used like any ordinary NumPy array, including as a data matrix in ConAction. Using virtual memory involves using hard drive space, so the increase in apparent memory comes at the cost of run time because of the added input-output (IO) between memory and the hard drive. Likewise, the \texttt{scipy.sparse} submodule of SciPy contains classes for sparse matrices that can also be used like ordinary NumPy arrays in ConAction, which can dramatically improve the effective short-term storage space.
+
+In this section we discussed how ConAction has some built-in performance enhancements, and the availability of tools for increasing performance when coding large or sparse data matrices.
+
+## Documentation
+
+While being easy to install and use are essential requirements for any scientific computing package, it is likewise important that the software package is well-communicated. One of the ways that a software package can be communicated is through effective documentation.
+
+In this thesis we used two forms of documentation in a integrated way thanks to modern package development tools. 
+
+The first for  was to include documentation strings within every function and class definition so that programmers inspecting the code can understand the gist of what is entailed in the code. This form of documentation can be found throughout the original source files if inspected, however calling the built-in Python \texttt{help} function will also display these documentation string.
+
+The second form of documentation was generated from the former by a combination of tools including Sphinx and Autodoc, which allowed us to automatically generate HTML documentation based on a combination of the documentation strings we wrote and some additional restructured text files we provided. This improves the maintainability of the software by ensuring that changes need to only be made in one or two places when a change to the source code is made. The documentation is hosted at \texttt{readthedocs.io}, but it can also be built locally by going to the \texttt{/conaction/docs} path and calling the \texttt{make html} command.
+
+## Future Support
+
+We will continue to support the ConAction Python package through its GitHub repository after the completion of this thesis. This includes addressing issues raised by users about the correctness and performance of the code, considering feature requests, and keeping the package compatible with supported versions of dependencies.
+
+## Conclusion
+
+ConAction is a Python package which provides researchers and data analysts with functions for computing various notions of coordinated change in structures. While ConAction is not yet a mature software\footnote{A mature software is a software that has been used for a long enough period of time that most of its initial faults have been removed or reduced by further development.} due to only recently being released to the public, it has undergone testing for performance and correctness, it is documented, and has a framework for further development and support.
+
+The starting set of features in ConAction it suitable for supporting simulation studies, empirical research, and theoretical research.

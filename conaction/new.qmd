@@ -1,0 +1,854 @@
+# New Instantiations of The Trinity of Covariation
+
+This chapter introduces new instantiations of the metaphor of *The Trinity of Covariation*.
+
+## Multilinear Correlation
+
+### Derivations
+
+The covariance of two random variables is conventionally defined as their centered mixed product moment. Just as the covariance in the standard sense captures something about simultaneous changes in two random variables, we explored generalizing this notion to multiple variables beyond two. We decided that a natural way to accomplish this was to compute the *centered mixed product moment* of a collection of random variables. To emphasize in this work that we are focusing on a generalization of covariance, which is bilinear, we will refer to this generalization as *multilinear covariance* as given in the following definition.
+
+> **Definition**
+>
+> Given a finite collection of real-valued random variables $\{X_1, \cdots, X_n\}$, their **multilinear covariance** is defined to be the following.
+> $$\text{Cov}\left[ X_1, \cdots, X_n \right] \triangleq \mathbb{E}\left[ \prod_{j=1}^{n} \left(X_j - \mathbb{E}[X_j] \right) \right]$$
+
+ This definition in standard literature bears names such as *centered mixed product moment* and *centered cross-product moment*, which are both comparably verbose to *multilinear covariance*. The qualifier *cross-product* can confuse readers into considering vector cross-products if clarifications are not given, while the former is technically accurate but communicates little intuition about what is being quantified.
+
+ Bilinearity is a property of covariance in the standard sense, and we wished to have multilinearity in the generalized sense. However, just because we gave a function the adjective "multilinear" does not make it multilinear in the desired sense of a multilinear map. See Definition \ref{def:multilinearmap} for a definition of *multilinear* as given by @Greub1978.
+
+ > **Definition** (@Greub1978)
+ >
+ > Let $E_1, \cdots, E_{p}$ be a collection of vector spaces, and also let $G$ be a vector space. A map $\phi: E_1 \times \cdots \times E_p \mapsto G$ is called **$p$-linear** if for every $i \in \{1, \cdots, p \}$ and scalars $\alpha$ and $\beta$ it holds that
+ > \begin{align*}
+	\phi (x_1, \cdots, x_{i-1}, \alpha x_i + \beta y_i, x_{i+1}, \cdots, x_p) &= \alpha \phi (x_1, \cdots, x_{i-1}, x_i, x_{i+1}, \cdots, x_p) \\
+	&  + \beta \phi (x_1, \cdots, x_{i-1}, y_i, x_{i+1}, \cdots, x_p).
+\end{align*}
+
+In the following proposition we claim and prove that multilinear covariance is multilinear in a mathematical sense. We took an approach of showing that the multilinear covariance of linear combinations of random variables is itself a linear combination of the multilinear covariances on those random variables.
+
+::: {.callout-caution collapse="true"}
+## Screen Size
+
+You may need to view the following result on a larger screen to see it in its entirety.
+:::
+
+> **Proposition**
+>
+> $$\text{Cov}\left[ \sum_{w_{1}=1}^{K_{1}} a_{w_{1}} U_{w_{1}}, \cdots, \sum_{w_{j}=1}^{K_{j}} a_{w_{j}} U_{w_{j}}, \cdots,  \sum_{w_{n}=1}^{K_{n}} a_{w_{n}} U_{w_{n}} \right]$$
+>
+> $$=$$
+>
+> $$\sum_{w_1=1}^{K_1} \cdots \sum_{w_j=1}^{K_j} \cdots \sum_{w_n=1}^{K_n} \left(\prod_{j=1}^{n} a_{w_j} \right) \text{Cov}\left[U_{w_1}, \cdots, U_{w_j}, \cdots, U_{w_n} \right]$$
+> 
+> **Proof**
+>
+> Starting with the definition of multilinear covariance, let $X_{j} = \sum_{w_{j}}^{K_{j}} a_{w_j}U_{w_j}$ for each $j \in \{1, \cdots, n \}$.
+> \begin{align*}
+	\text{Cov} \left[ \sum_{w_1=1}^{K_1} a_{w_1}U_{w_1}, \cdots, \sum_{w_{j}=1}^{K_{j}} a_{w_{j}} U_{w_{j}}, \cdots,  \sum_{w_n=1}^{K_n} a_{w_n}U_{w_n}\right] &= \mathbb{E}\left[ \prod_{j=1}^{n} \left( \sum_{w_{j}=1}^{K_{j}} a_{w_{j}} U_{w_{j}} - \mathbb{E}\left[ \sum_{w_{j}=1}^{K_{j}} a_{w_{j}} U_{w_{j}} \right]  \right) \right] \\
+	& = \mathbb{E}\left[ \prod_{j=1}^{n} \left( \sum_{w_{j}=1}^{K_{j}} a_{w_{j}} U_{w_{j}} - \sum_{w_{j}=1}^{K_{j}} \mathbb{E}\left[ a_{w_{j}} U_{w_{j}} \right]  \right) \right] \\
+	& = \mathbb{E} \left[ \sum_{w_1}^{K_1} \cdots \sum_{w_j}^{K_j} \cdots \sum_{w_n}^{K_n} \prod_{j=1}^{n} \left( a_{w_j}U_{w_j} - \mathbb{E}\left[ a_{w_j}U_{w_j} \right] \right) \right] \\
+	& = \sum_{w_1}^{K_1} \cdots \sum_{w_j}^{K_j} \cdots \sum_{w_n}^{K_n} \mathbb{E} \left[ \prod_{j=1}^{n} \left( a_{w_j}U_{w_j} - \mathbb{E}\left[ a_{w_j}U_{w_j} \right] \right) \right] \\
+	& = \sum_{w_1}^{K_1} \cdots \sum_{w_j}^{K_j} \cdots \sum_{w_n}^{K_n} \mathbb{E} \left[ \prod_{j=1}^{n} a_{w_j} \left( U_{w_j} - \mathbb{E}\left[ U_{w_j} \right] \right) \right] \\
+	& = \sum_{w_1}^{K_1} \cdots \sum_{w_j}^{K_j} \cdots \sum_{w_n}^{K_n} \left( \prod_{j=1}^{n} a_{w_j} \right) \mathbb{E} \left[ \prod_{j=1}^{n} \left( U_{w_j} - \mathbb{E}\left[ U_{w_j} \right] \right) \right] \\
+	& = \sum_{w_1}^{K_1} \cdots \sum_{w_j}^{K_j} \cdots \sum_{w_n}^{K_n} \left( \prod_{j=1}^{n} a_{w_j} \right) \text{Cov} \left[ U_{w_1}, \cdots,  U_{w_j}, \cdots, U_{w_n} \right]
+\end{align*}
+> $\blacksquare$
+
+Multilinear covariance generalizes covariance from a bilinear comparison of two random variables to a multilinear comparison of finitely-many random variables. This generalizes the numerator of Pearson's product-moment correlation coefficient, which leaves finding a generalization of its denominator. Knowing that the denominator of Pearson's correlation is the product of the standard deviations of the respective two variables compared in the numerator, such a generalization of the denominator should reduce to the product of the standard deviations in the case of only two variables. Another particularly useful property of Pearson's correlation is its normalization onto the interval $[-1,1]$ using the Cauchy-Schwartz inequality. Combining these properties into a goal, we desired to find an inequality that generalizes the Cauchy-Schwartz inequality in such a way that normalizes the multilinear covariance onto $[-1,1]$.
+
+@Nantomah2017 provides such a generalization of the Cauchy-Schwarz inequality in the form of the *generalized Hölder's inequality for sums* (see proposition below). They accomplish this by generalizing the absolute value of the inner product of two vectors to the sum-aggregated element-wise product of a collection of vectors, and by generalizing the product of 2-norms to the product of $p$-norms under specific constraints. The constraints on the orders of the norms are that individually they are strictly greater than unity, and that the sum of their reciprocals equals unity.
+
+> **Proposition** (@Nantomah2017)
+>
+> Given $Q_{i,j} \in \mathbb{R}\ \forall i,j$ where $i \in \{ 1, \cdots, m \}$ and $j \in \{ 1, \cdots, n \}$ then
+>
+> $$\sum_{i=1}^{m} \left|\prod_{j=1}^{n} Q_{i,j}\right| \leq \prod_{j=1}^{n} \left( \sum_{i=1}^{m} |Q_{i,j}|^{\alpha_j} \right)^{\frac{1}{\alpha_j}}$$
+>
+> provided that $\alpha_j > 1 \forall j$ and that $\sum_{j=1}^{n} \frac{1}{\alpha_j} = 1$.
+
+Before returning to the multilinear covariance, let us consider that a new correlation coefficient can be defined from the generalized H\"older's inequality for sums by defining a quotient of the left-hand-side of the inequality divided by the right-hand-side. This gives a function bounded to $[0,1]$. Taking such a ratio requires that none of the data vectors are the zero vector. Then by dropping the absolute value in the numerator we obtain a function bounded to $[-1,1]$. Lastly, under suitable assumptions such as integrability and the existence of a moments\footnote{The existence of moments here also entails the existence of a suitable probability function.}, we write this function using expectations as given in Definition \ref{def:holdercorrelation}.
+
+> **Definition**
+>
+> Given a finite collection of real-valued random variables $\{X_1, \cdots, X_n\}$,  and $\alpha_j \in \mathbb{R}_{>1}$, their **Hölder's correlation coefficient** is given by
+>
+> $$\mathfrak{H} \left[ X_1, \cdots, X_n \right](\vec \alpha) \triangleq \frac{\mathbb{E} \left[ \prod_{j=1}^{n} X_j \right]}{\prod_{j=1}^{n} \sqrt[\alpha_j]{\mathbb{E} \left[ |X_j|^{\alpha_j} \right]}}$$
+>
+>provided that $\sum_{j=1}^{n} \frac{1}{\alpha_j} = 1$ and that the desired moments exist.
+
+While H\"older's correlation coefficient as given in Definition \ref{def:holdercorrelation} can be estimated from data, its primary use in this thesis is to provide a definition from which other more familiar correlation coefficients can be generalized. We begin by generalizing the reflective correlation coefficient from the bilinear case to the multilinear case.\\
+
+
+The reflective correlation coefficient\footnote{We did not find a citable source for the origin of the reflective correlation coefficient. While some studies refer to it without citing its origin (e.g. \cite{Zhu2014} and \cite{Tllse2021}), the earliest mentioning of it we found was on Wikipedia \textit{circa} 2009.} is the same in mathematical form as the Pearson product-moment correlation coefficient except that only uncentered moments are used. By setting $\alpha_j = n$ for each $j \in \{1, \cdots, n \}$ we obtain a special case of Definition \ref{def:holdercorrelation} which is also a multilinear generalizaton of the reflective correlation coefficient (Definition \ref{def:reflectivemultilinearcorrelation}). This can be easily verified by setting $n=2$ and comparing to the reflective correlation coefficient, and it also satisfies the constraints set on $\alpha_j$ in Proposition \ref{thm:generalizedholdersinequalitysums}.
+
+> **Definition**
+>
+> Given a finite collection of real-valued random variables $\{X_1, \cdots, X_n\}$,  and $\alpha_j \in \mathbb{R}_{>1}$, their **multilinear reflective correlation coefficient** is given by
+>
+> $$R_{\text{reflective}} \left[ X_1, \cdots, X_n \right] \triangleq \frac{\mathbb{E} \left[ \prod_{j=1}^{n} X_j \right]}{\prod_{j=1}^{n} \sqrt[n]{\mathbb{E} \left[ |X_j|^{n} \right]}}$$
+>
+> provided that the desired moments exist.
+
+Before generalizing the Pearson correlation coefficient, we introduce a definition that generalizes the standard deviation. Just as the standard deviation can be thought of as the 2-norm of the errors from the mean, we consider the $p$-norm of the errors from the mean to be the \textit{Nightingale deviation of order $p$} as given in Definition \ref{def:minkowskideviation}.\footnote{We named this generalization of the standard deviation after Florence Nightingale who pioneered modern nursing and certain approaches to data visualization.} The Nightingale deviation of order $p$ is a special case of the the power mean (sometimes called the generalized mean) (@Sykora2009), but it first centers the random variables and takes an absolute value.\\
+
+> **Definition**
+>
+> Given a real-valued random variable $X$ whose $p$th moment is defined, its **Nightingale deviation of order $p$** is given by
+> $$\text{Dev}_p[X] \triangleq \sqrt[p]{\mathbb{E}\left[\left|X - \mathbb{E}\left[ X \right]\right|^p\right]}.$$
+
+With the multilinear reflective correlation coefficient as given in Definition \ref{def:reflectivemultilinearcorrelation}, a generalization of the Pearson correlation coefficient is obtained by centering the random variables by their expectation before computing the multilinear reflective correlation. The result is Definition \ref{def:pearsonmultilinearcorrelation} which is abbreviated using the definitions of multilinear covariance (Definition \ref{def:multilinearcovariance}) and Nightingale deviations of order $p$ (Definition \ref{def:minkowskideviation}).
+
+> **Definition**
+>
+> Given a finite collection of real-valued random variables $\{X_1, \cdots, X_n\}$, their **multilinear Pearson's correlation coefficient** is defined to be
+>
+> $$\text{Corr}\left[ X_1, \cdots, X_n \right] \triangleq \frac{\text{Cov} \left[ X_1, \cdots, X_n \right]}{\prod_{j=1}^{n} \text{Dev}_n[X_j]}.$$
+
+As exemplified above, making substitutions for the random variables in H\"older's correlation coefficient allows for an easy process of deriving new correlation coefficients. For example, substituting $X_j = \sin (U_j)$ produces a generalization of the \textit{circular correlation coefficient} used in circular statistics. Similarly, substituting $X_j = |U_j|$ obtains an \textit{absolute correlation coefficient}. There is a general reason why we should take an interest in multiple notions of correlation which we consider in the next subsection: detecting statistical dependence.
+
+
+## Interpretation
+
+From @Athreya2006 we can consider a proposition which logically connects the notion of expectations of products of functions of random variables to the notion of statistical independence. If we choose a function for which this equality does not hold, then we have found that those variables exhibit statistical dependence.  Statistical dependence entails that some events are happening more (or less) together than we would expect compared to the univariate probabilities of those events. Imprecisely, statistical dependence suggests to us that *something is going on*.
+
+::: {.callout-note}
+Formally, @Athreya2006 restrict their result to Borel measurable functions. This restriction can be easily met in real applications of statistics so we do not discuss it further here, but in theory there exists non-Borel measurable functions.
+:::
+
+> **Proposition** (@Athreya2006)
+>
+> Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $\{ X_1, \cdots, X_n \}$, $2 \leq n < \infty$ be a collection of random variables on $(\Omega, \mathcal{F}, P)$. Then $\{ X_1, \cdots, X_n \}$ are independent if-and-only-if
+>
+> $$\mathbb{E}\left[ \prod_{j=1}^n f_j(X_j) \right] = \prod_{j=1}^n \mathbb{E} \left[ f_j(X_j)  \right]$$ 
+>
+> for all bounded Borel measurable functions $f_j : \mathbb{R} \mapsto \mathbb{R}$, $\forall j \in \{1, \cdots, n \}$.
+
+This proposition provides a mathematically precise way of considering multilinear correlation coefficients, and now we turn to building some intuitions about the type of dependence that is described by multilinear correlations. This cannot be done for all choices of functions of random variables, but we will consider the multilinear Pearson correlation as a tractable and instructive example.
+
+Since the multilinear Pearson correlation is defined on finitely-many variables, it can be difficult to understand what it describes when the number of variables is greater than three. In order to build intuition about what it describes in higher dimensions, let us first consider what it describes in two dimensions. Figure \ref{fig:quadrantcorr} illustrates how points contribute weight to a Pearson correlation depending on how it is oriented about the centroid of the data.\\
+
+Figure \ref{fig:quadrantcorr}(a) illustrates how even when two independent-and-identically distributed standard normal variables are sampled, there will almost certainly be at least a sleight inbalance between the positive and negative weights contributed. Panels (b) and (c) of Figure \ref{fig:quadrantcorr} emphasize the fact that under perfect negative or positive correlation the points can be reliably found in specific quadrants. Figure \ref{fig:quadrantcorr}(d) shows how non-linear relationships between the variables does not mean that there will be zero correlation. A salient point to take away from all of these panels is that the weight that a point contributes to a Pearson correlation coefficient is equal to the signed area of the rectangle that can be drawn between the centroid and the data point. For trilinear Pearson correlation coefficients this is replaced with the signed volume of a 3-dimensional box, and in the multilinear case for more than 3 variables this signed area is replaced with the signed hypervolume of an $n$-orthotope (i.e. an n-dimensional box). The magnitude of these signed measures gets scaled down due to the normalization factor constituted by the product of the $p$-norms as discussed earlier in this section.
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+	(a) & (b) \\
+	\includegraphics[scale=0.45]{./quadrant_cov_visual/zero_corr.pdf} & \includegraphics[scale=0.45]{./quadrant_cov_visual/neg_corr.pdf} \\
+	(c) & (d) \\
+	\includegraphics[scale=0.45]{./quadrant_cov_visual/pos_corr.pdf} & \includegraphics[scale=0.45]{./quadrant_cov_visual/cubed_corr.pdf} \\
+	\end{tabular}
+	\caption{Visualization of the weights contributed to bilinear covariance and correlation about the mean. The magenta-coloured \texttt{x} is the position of the sample centroid, however all panels used a randomly-selected mean vector $\vec{\mu} \sim \mathcal{N} (0, 1)$. Rectangles are drawn from the sample centroid to each sample point, coloured red or blue depending on whether they contribute positive or negatively weight to the sample covariance respectively. (a) A sample from a bivariate normal distribution with covariance matrix equal to the identity matrix. (b) A sample from a bivariate normal distribution with perfectly negative correlation. (c) A sample from a bivariate normal distribution with perfectly positive correlation. (d) A sample from $(X,Y)$ where $X \sim \mathcal{N} (0, 1)$ and $Y \leftarrow X^3 + \epsilon$ where $\epsilon \sim \mathcal{N} (0, 1)$.}
+	\label{fig:quadrantcorr}
+\end{figure}
+
+
+The sign of the weight that a point contributes to a multilinear correlation coefficient can be predicted based on the number of variables being considered, and which orthant\footnote{The term \textit{orthant} is a general term that encompasses the left and right about zero on the number line, the quadrants about zero on the plane, and the octants in 3D. In higher dimensions we will simply use the term \textit{orthant}, however some resources use the term \textit{hyperoctant}.} that point sits within. Table \ref{tab:orthantsign} shows how when certain combinations of components of a point have a positive or negative sign, the resulting product will predictably have a positive or negative sign depending on whether the correlation is among 2, 3, or 4 variables.\\ 
+
+Figure \ref{fig:trinlinearcorrelationplots} visualizes a trivariate analog of Figure \ref{fig:quadrantcorr}. Specifically, a matrix $\mathbf{\theta}_{1000 \times 3}$ of trainable parameters were optimized by gradient descent to minimize the absolute difference between the multilinear Pearson correlation coefficient calculated on $\mathbf{\theta}_{1000 \times 3}$, as if the columns represented random variables, from a target correlation score.\footnote{Using gradient descent in this case requires computing the partial derivative of the estimator of the multilinear correlation coefficient with respect to an arbitrary element of $\mathbf{\theta}$. We provide a derivation of such a derivative with respect to an arbitrary element of a data matrix in Appendix \ref{chap:derivativecorrelation} because common computer algebra systems including SageMath, Wolfram Alpha, Maple, and SymPy do not handle the choice of entry being arbitrary. However, to produce Figure \ref{fig:trinlinearcorrelationplots} we used automated differentiation \textit{via} the \texttt{tensorflow} Python package \cite{Abadi2015}.} Such data sets are non-unique due to the translation invariance and scaling properties of the multilinear Pearson correlation coefficient. Figure \ref{fig:trinlinearcorrelationplots} conforms to Table \ref{tab:orthantsign} in the sense that the directions that either minimized or maximized the multilinear trilinear correlation coefficient could be found in specific octants that were opposite in combinations of signum.\\
+
+\begin{figure}[H]
+	\begin{tabular}{cc}
+	 (a) & (b) \\
+	\includegraphics[scale=0.47]{./trilinear_correlation_plot/neg_corr_scatter.pdf} & \includegraphics[scale=0.47]{./trilinear_correlation_plot/pos_corr_scatter.pdf} \\
+	(c) & (d) \\
+	\includegraphics[scale=0.4]{./trilinear_correlation_plot/loss_history_neg.pdf} & \includegraphics[scale=0.4]{./trilinear_correlation_plot/loss_history_pos.pdf} \\
+	\end{tabular}
+	\caption{Datasets optimized to have trilinear correlation using gradient descent on the absolute difference. The scatter plots are coloured such that blue represents negative contributions to the correlation statistic, red to positive contributions, and white in-between for zero contribution. (a) Dataset with trilinear correlation close to negative one. (b) Dataset with trilinear correlation close to positive one. (c) Training history to produce dataset with negative trilinear correlation. (d)  Training history to produce dataset with positive trilinear correlation.}
+	\label{fig:trinlinearcorrelationplots}
+\end{figure}
+
+A more subtle pattern arises from observing Table \ref{tab:orthantsign}, which is that the \textit{parity} of the number of variables predicts how an orthant relates to its reflection.\footnote{If one considers the arity of a function to be the number of variables in its input, then it is the \textit{parity of the arity}. Such a rhyme might serve as a mnemonic to remember this pattern.} If the number of variables is even, then the weight contributed by a point and its reflection will have the same sign. But if the number of variables is odd, then weight contributed by a point and its reflection will have opposite signs. This has an important consequence for distributions that are symmetric.\\
+
+If a distribution is symmetric, then its odd moments will always be zero. A symmetric distribution may or may not have zero even moments. Thus odd-arity multilinear Pearson correlation coefficients not only tell us about dependence, but can also tell us about the symmetry of the distribution via a contrapositive argument. If a distribution being symmetric implies that the odd-arity multilinear Pearson correlation coefficients are zero, and the odd-arity multilinear Pearson correlation coefficients are not zero, then the distribution in question is not symmetric. The converse argument is not true in general.\\
+
+\begin{table}[H]
+	\caption{Relationship in sign of a multilinear correlation between a given orthant and its reflection. Red indicates that the product of certain values with that signature results in a positive number, and blue indicates the product of values when that signature results in a negative number. (left) Two variables. (middle) Three variables. (right) Four variables.}
+	\centering
+\label{tab:orthantsign}
+	\begin{tabular}{cc|cc|cc}
+	\hline
+	Two & Variables & Three & Variables & Four & Variables \\
+	\hline
+	Orthant & Reflection & Orthant & Reflection & Orthant & Reflection \\
+	\hline
+	\cellcolor{red!25} (--,--) & \cellcolor{red!25} (+,+) & \cellcolor{red!25} (+,+,+) & \cellcolor{blue!25} (--,--,--)  & \cellcolor{red!25} (--,--,--,--) & \cellcolor{red!25} (+,+,+,+)  \\
+	\cellcolor{blue!25} (--,+) & \cellcolor{blue!25} (+,--) &  \cellcolor{red!25} (--,--,+) & \cellcolor{blue!25} (+,+,--)  &     \cellcolor{blue!25} (--,--,--,+) & \cellcolor{blue!25} (+,+,+,--)  \\
+	 & & \cellcolor{red!25} (--,+,--) & \cellcolor{blue!25} (+,--,+) & \cellcolor{blue!25} (--,--,+,--) & \cellcolor{blue!25} (+,+,--,+) \\
+	 & & \cellcolor{red!25} (+,--,--) & \cellcolor{blue!25} (--,+,+) &  \cellcolor{red!25} (--,--,+,+) & \cellcolor{red!25} (+,+,--,--)  \\
+	 & & & & \cellcolor{blue!25} (--,+,--,--) & \cellcolor{blue!25} (+,--,+,+) \\
+	 & & & & \cellcolor{red!25} (--,+,--,+) & \cellcolor{red!25} (+,--,+,--) \\
+	 & & & & \cellcolor{red!25} (--,+,+,--) & \cellcolor{red!25} (+,--,--,+) \\
+	 & & & &  \cellcolor{blue!25} (--,+,+,+) & \cellcolor{blue!25} (+,--,--,--) \\
+	\hline
+	\end{tabular}
+\end{table}
+
+
+## Nightingale Correlation
+
+We now introduce Nightingale correlation as an instantiation of the Trinity of Covariation that generalizes the Nightingale deviation of order $p$ (Definition \ref{def:minkowskideviation}), and the absolute multilinear covariance. It provides another way of quantifying coordinated change by taking a $p$-norm of an element-wise product of vectors.\\ 
+
+### Derivations
+
+We begin with the notion of a seminorm, see Definition \ref{def:seminorm},  which is a generalization of the notion of a norm where the assumption of point separation is absent. Point separation of a function $p:V \mapsto \mathbb{R}$ is the property that $p(x) = 0 \implies x = 0$ which in the context of norms gives the intuitive property that the size of a vector is only zero when the vector is the zero vector.\\
+
+\begin{Definition}[mydefinition=Seminorm \cite{weisstein}, label=def:seminorm]
+Give a vector space $X$  over  $\mathbb{R}$ or $ \mathbb{C}$, and a scalar field $\mathcal{F}$, a real-valued function $p:X\mapsto \mathbb{R}$ is called a \underline{seminorm} if it satisfies two conditions $ \forall x \in X,$:
+\begin{enumerate}
+	\item Subadditivity: $ \forall y \in X,$
+	$$p(x+y) \leq p(x) + p(y)$$
+	\item Absolute homogeneity: $\forall \alpha \in \mathcal{F}$
+	$$p(\alpha x) = |\alpha|p(x)$$
+\end{enumerate}
+\end{Definition}
+
+Here we generalize the notion of a seminorm from a function of a single vector to a function of multiple vectors as given in Definition \ref{def:multiseminorm}, which we refer to as \textit{multiseminorms}. The prefix \textit{multi-} refers to the use of multiple vectors. The approach to this generalization is to take the subadditivity and absolute homogeneity properties that hold in a seminorm, and expand the definition by taking this to be true input-wise for a multiary function.\\
+
+\begin{Definition}[mydefinition=Multiseminorm, label=def:multiseminorm]
+Let $X_1, \cdots, X_n$ be a collection of vector spaces over  $\mathbb{R}$ or $ \mathbb{C}$. Given a scalar field $\mathcal{F}$, a real-valued function $p: X_1 \times \cdots \times X_n \mapsto \mathbb{R}$ is called a \underline{multiseminorm}  if it satisfies two conditions  $\forall i \in \{1, \cdots,  n\}$, and $\forall (x_1, \cdots, x_n) \in X^n$:
+\begin{enumerate}
+	\item Subadditivity: $\forall y_i \in X_i$\begin{align*}
+	p(x_1, \cdots, x_i + y_i, \cdots, x_n) & \leq p(x_1, \cdots, x_i, \cdots, x_n)\\
+	& +p( x_1, \cdots, y_i, \cdots, x_n)
+\end{align*}
+	\item Absolute homogeneity: $\forall \alpha \in \mathcal{F}$
+
+	$$p(x_1, \cdots, \alpha x_i, \cdots, x_n) = |\alpha| p(x_1, \cdots, x_i, \cdots, x_n)$$
+\end{enumerate}
+\end{Definition}
+
+With the notion of a multiseminorm in mind as an abstract type of function, we can define a specific function that can be computed on finite vectors which satisfies these properties. This is given in Definition \ref{def:minkowskimultiseminorm} to be the \textit{Minkowski multiseminorm of order $p$}, which is a $p$-norm of an elementwise product of a collection of vectors.\\
+
+\begin{Definition}[mydefinition=Minkowski Multiseminorm of Order P, label=def:minkowskimultiseminorm]
+Given a collection of vectors $\{\vec{x_1}, \cdots, \vec{x_n} \}$ satisfying $\vec{x_j} \in \mathbb{R}^m$, their \underline{Minkowski multiseminorm of order $p$}  is defined to be
+
+$$\vert| \vec{x}_1, \cdots, \vec{x}_n \vert|_p \triangleq \sqrt[p]{ \sum_{i=1}^{m} \left| \prod_{j=1}^{n} x_{i,j} \right|^p}$$
+
+where $p \in \mathbb{R}_{>1}$.
+\end{Definition}
+
+The Minkowski multiseminorm of order $p$ is a multiseminorm. The subadditivity property can be confirmed by considering Minkowski's inequality (i.e. the triangle inequality generalized to $p$-norms), and the absolute homogeneity can be checked by scaling an arbitrary input and applying some algebra to obtain the desired result.\\
+
+Just as a norm can induce a metric, so can a seminorm induce a pseudometric. Likewise, one can define a metric-like function from the notion of a multiseminorm, which we define to be a \textit{multipseudometric}. In the particular case of the Minkowski multiseminorm of order $p$ we define a function in Definition \ref{def:minkowskimultipseudometric} called a \textit{Minkowski multipseudometric of order $p$} which inherits the properties of a pseudometric input-wise.\\
+
+\begin{Definition}[mydefinition=Minkowski Multipseudometric of Order P, label=def:minkowskimultipseudometric]
+Given a two collections of vectors $\{\vec{x_1},  \cdots, \vec{x_n} \}$ and $\{ \vec{y_1}, \cdots, \vec{y_n} \}$ satisfying $\vec{x_j}, \vec{y_j} \in \mathbb{R}^m$, their \underline{Minkowski multipseudometric of order $p$}  is defined to be
+
+$$\vert| \vec{x}_1 - \vec{y}_1, \cdots, \vec{x}_n - \vec{y}_n \vert|_p \triangleq \sqrt[p]{ \sum_{i=1}^{m} \left| \prod_{j=1}^{n} \left( x_{i,j} - y_{i,j} \right) \right|^p}$$
+
+where $p \in \mathbb{R}_{>1}$.
+\end{Definition}
+
+Taking Definition \ref{def:minkowskimultipseudometric} that applies to vectors, we can define a statistical function under an assumption of $p$-integrability that considers the deviations from the mean coordinated by an index set. This function we take to be the \textit{Nightingale covariance of order $p$} as given in Definition \ref{def:minkowskimultideviation}.\\
+
+\begin{Definition}[mydefinition=Nightingale Covariance of Order P, label=def:minkowskimultideviation]
+
+Given a collection of random variables $\{ X_1, \cdots, X_n \}$ with sufficiently defined moments, their \underline{Nightingale covariance of order $p$} is given by 
+$$\operatorname{NCov}_p \left[X_1, \cdots, X_n \right] \triangleq \sqrt[p]{ \mathbb{E} \left[ \left| \prod_{j=1}^{n} \left( X_{j} - \mathbb{E}[X_{j}] \right) \right|^p \right]}$$
+
+where $p \in \mathbb{R}_{>1}$.
+\end{Definition}
+
+Definition \ref{def:minkowskimultideviation} represents a unification of multiple notions in addition to being a generalization. We saw with Definition \ref{def:minkowskideviation} giving the Nightingale deviation of order $p$ that the standard deviation can be generalized through the use of different orders of norms. Since the Nightingale covariance of order $p$ reduces to the Nightingale deviation of order $p$ when there is only one variable, the Nightingale covariance of order $p$ is a generalization of the Nightingale deviation of order $p$ and the standard deviation. The Nightingale covariance of order $p$ is also a generalization of the multilinear absolute covariance, which is obtained when $p=1$.\\
+
+Similar to multilinear correlation, it is desirable to find a normalization of Nightingale covariance using a suitable inequality. The inequality in Proposition \ref{prop:nightinequality} serves this purpose, which generalizes the generalized H\"older's inequality for sums given in Proposition \ref{thm:generalizedholdersinequalitysums}.\\
+
+\begin{Proposition}[myproposition=, label=prop:nightinequality]
+Given $Q_{i,j} \in \mathbb{R}\ \forall i,j$ where $i \in \{ 1, \cdots, m \}$ and $j \in \{ 1, \cdots, n \}$ then
+
+$$\sqrt[p]{\sum_{i=1}^{m} \left|\prod_{j=1}^{n} Q_{i,j}\right|^p} \leq \prod_{j=1}^{n} \left( \sum_{i=1}^{m} |Q_{i,j}|^{\alpha_j} \right)^{\frac{1}{\alpha_j}}$$
+
+where $p \geq 1$, $\alpha_j > 1 \forall j$, and $\sum_{j=1}^n \frac{1}{\alpha_j} = 1$.
+
+\tcbline
+\textbf{Proof}\\
+\scriptsize
+Beginning with the generalized H\"older's inequality for sums given in Proposition \ref{thm:generalizedholdersinequalitysums}, we have
+
+$$\sum_{i=1}^{m} \left|\prod_{j=1}^{n} Q_{i,j}\right| \leq \prod_{j=1}^{n} \left( \sum_{i=1}^{m} |Q_{i,j}|^{\alpha_j} \right)^{\frac{1}{\alpha_j}}$$
+
+where $\alpha_j > 1 \forall j$ and $\sum_{j=1}^n \frac{1}{\alpha_j} = 1$. Writing 
+
+$$\biggl \| \bigodot_{j=1}^{n} \vec{P}_j \biggr  \|_1 = \sum_{i=1}^{m} \left|\prod_{j=1}^{n} Q_{i,j}\right|$$
+
+where $\bigodot$ is the Hadamard product (also called the elementwise product) and 
+
+$$\vec{P}_j = \begin{bmatrix}
+Q_{1,j} \\
+Q_{2,j} \\
+\vdots \\
+Q_{m-1,j} \\
+Q_{m,j} \\
+\end{bmatrix}.$$
+
+Using a property of $p$-norms that $\vert| \vec{x} \vert|_p \leq \vert| \vec{x} \vert|_q$ where $p \geq q$, we have that 
+
+$$\biggl \| \bigodot_{j=1}^{n} \vec{P}_j \biggr  \|_p \leq \biggl \| \bigodot_{j=1}^{n} \vec{P}_j \biggr  \|_1$$
+
+for any $p \geq 1$. Finally, note that
+
+$$\biggl \| \bigodot_{j=1}^{n} \vec{P}_j \biggr  \|_p = \sqrt[p]{\sum_{i=1}^{m} \left|\prod_{j=1}^{n} Q_{i,j}\right|^p}.$$
+
+\hfill $\blacksquare$
+\end{Proposition}
+
+With Proposition \ref{prop:nightinequality} we have a normalization for the Nightingale covariance which we us to define the \textit{Nightingale correlation} as in Definition \ref{def:nightingalecorrelation}.\\
+
+\begin{Definition}[mydefinition=Nightingale's Correlation Coefficient, label=def:nightingalecorrelation]
+Given a finite collection of real-valued random variables $\{X_1, \cdots, X_n\}$,  and $p, \alpha_j \in \mathbb{R}_{>1}$, their \underline{Nightingale's correlation coefficient} is given by
+
+$$\mathfrak{N} \left[ X_1, \cdots, X_n \right] \triangleq \frac{\operatorname{NCov}_p\left[ X_1, \cdots, X_n \right]}{\prod_{j=1}^{n} \operatorname{Dev}_{\alpha_j}[X_j]}$$
+
+where $\operatorname{Dev}_{\alpha_j}[X_j]$ is the Nightingale deviation of order $\alpha_j$ as given in Definition \ref{def:minkowskideviation}, and provided that $\sum_{j=1}^{n} \frac{1}{\alpha_j} = 1$ and that the desired moments exist.
+\end{Definition}
+
+Having defined Nightingale correlation, we will next discuss how to interpret it.
+
+### Interpretation
+
+The Nightingale correlation coefficient is a mathematically precise formula that intuitively encodes simultaneous change because in each instance it is quantifying how much a collection of random variables deviate together from their centroid.
+
+Similar to the multilinear Pearson correlation coefficient, the Nightingale correlation coefficient can be interpreted as being weighted measures of $n$-orthotopes drawn out between a centroid and a point. A key difference between these two statistics is that the contributing weights in the expectation of product deviations will always be positive. Consider again Figure \ref{fig:quadrantcorr}, but as if all the rectangles were positive (i.e. red) for a visual understanding of this statistic. This distinction also means that the Nightingale correlation does not distinguish between orthants in the same way, and that a symmetric distribution will not necessarily have a zero Nightingale covariance among an odd number of variables.
+
+Lastly, the Nightingale correlation coefficient uses an expectation of a product of functions of random variables, so it is interpretable in terms of Proposition \ref{thm:prodmomentindependence}.
+
+Next we will introduce inner correlations.
+
+## Inner Correlation
+
+The notion of an inner product space (Definition \ref{def:innerproductspace}) is a central concept of many disciplines of modern mathematics, and has found applications in virtually every branch of science. A familiar example to a student of linear algebra is the dot product between two vectors, while in statistics it can be found in the covariance between two random variables. They also occur frequently in functional analysis where infinite-dimensional vector spaces such as Hilbert spaces and Banach spaces are considered.\\
+
+\begin{Definition}[mydefinition=Inner Product Space, label=def:innerproductspace]
+An \underline{inner product space} is a vector space $V$ over a field $F$ equipped a map $\langle \cdot, \cdot \rangle : V \times V \mapsto F$ called an \underline{inner product} satisfying the following properties for all $x,y,z \in V$ and $a,b \in F$
+
+\begin{itemize}
+	\item Conjugate symmetry:  $\langle x, y \rangle = \overline{\langle y, x \rangle}$
+	\item Linearity: $\langle ax + by, z \rangle = a\langle x, z \rangle + b\langle y, z \rangle$
+	\item Positive-definiteness: $x \neq 0 \implies \langle x, x \rangle > 0$
+\end{itemize} 
+\end{Definition}
+
+We will turn to two generalizations of inner product spaces to define new correlation functions on collections of random variables.
+
+### Misiak Correlation
+
+In 1989 Misiak introduced $n$-inner product spaces as a natural generalization of  $2$-inner product spaces \cite{Misiak1989}. The earlier motivations for Misiak's work were built on a history of studying abstract $n$-dimensional metric spaces, which we do not focus on in this work. Rather we will focus on using the definitions and propositions developed by Misiak to define a new statistc. We begin with considering a generalization of inner products given in Definition \ref{def:ninnerproduct}.\\
+
+\begin{Definition}[mydefinition=$n$-Inner Product \cite{Misiak1989}, label=def:ninnerproduct]
+Let $n$ be a positive integer and $V$ a real vector space such that $\dim V \geq n$ and $( \bullet, \bullet | \bullet, \cdots, \bullet )$ is a real function defined on $\underbrace{V \times V \times  \cdots \times V}_{n+1}$ such that\\ $ \forall\ \vec{a}, \vec{b}, \vec{x}_1, \cdots, \vec{x}_{n} \in V$
+
+\begin{enumerate}
+	\item $(\vec{x}_1, \vec{x}_1 | \vec{x}_2, \cdots, \vec{x}_n) \geq 0$;
+	\item $(\vec{x}_1, \vec{x}_1 | \vec{x}_2, \cdots, \vec{x}_n) = 0 \iff \vec{x}_1, \vec{x}_2, \cdots, \vec{x}_n$ are linearly independent;
+	\item $(\vec{a}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1}) = (\phi(\vec{a}), \phi (\vec{b}) | \pi(\vec{x}_1), \cdots, \pi(\vec{x}_{n-1}))$ and for any bijections
+	\begin{align*}
+		\pi : \{ \vec{x}_1, \cdots, \vec{x}_{n-1}  \} &\mapsto \{ \vec{x}_1, \cdots, \vec{x}_{n-1}  \}\\
+		\phi:  \{ \vec{x}_1, \cdots, \vec{x}_{n-1}  \} &\mapsto \{ \vec{x}_1, \cdots, \vec{x}_{n-1} \}; \\
+	\end{align*}
+	\item $n > 1 \implies (\vec{x}_1, \vec{x}_1 | \vec{x}_2, \cdots, \vec{x}_n) = (\vec{x}_2, \vec{x}_2 | \vec{x}_3, \cdots, \vec{x}_n)$;
+	\item $(\alpha \vec{a}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1})=  \alpha (\vec{a}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1})\ \forall\  \alpha \in \mathbb{R}$;
+	\item $ (\vec{a} + \vec{y}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1}) =  (\vec{a}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1}) + (\vec{y}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1})\ \forall\ \vec{y} \in V$;
+\end{enumerate}
+
+Then $( \bullet, \bullet | \bullet, \cdots, \bullet )$ is called an \underline{$n$-inner product} and $(V, ( \bullet, \bullet | \bullet, \cdots, \bullet ))$ is called an \underline{$n$-inner product space}.
+\end{Definition}
+
+Definition \ref{def:ninnerproduct} is quite general, and does not by itself give us specific a function that we could compute on a function or random variable. Rather $n$-inner products represent an abstract class of functions that satisfy a list of axioms, similar to inner products themselves. Misiak provided a way of systematically defining $n$-inner products from inner products using the notion of a determinant of a matrix of inner products as given in Proposition \ref{prop:misiakcorollary15}.\\
+
+\begin{Proposition}[myproposition=\cite{Misiak1989}, label=prop:misiakcorollary15]
+
+For every inner product $(\bullet, \bullet)$ on $V$, the function $( \bullet, \bullet | \bullet, \cdots, \bullet )$ defined on $V^{n+1}$ by
+
+$$( \vec{a}, \vec{b} | \vec{x}_1, \cdots, \vec{x}_{n-1} ) \triangleq \begin{vmatrix}
+(\vec{a}, \vec{b}) & (\vec{a}, \vec{x}_1) & \cdots & (\vec{a}, \vec{x}_{n-1}) \\ 
+(\vec{x}_1, \vec{b}) & (\vec{x}_1, \vec{x}_1) & \cdots & (\vec{x}_1, \vec{x}_{n-1}) \\ 
+\vdots & \vdots & \ddots & \vdots \\
+(\vec{x}_{n-1}, \vec{b}) & (\vec{x}_{n-1}, \vec{x}_1) & \cdots & (\vec{x}_{n-1}, \vec{x}_{n-1}) \\
+\end{vmatrix} $$
+
+is an $n$-inner product on $V$.
+\tcbline
+\textbf{Proof}\\
+See Corollary 15 in \cite{Misiak1989}.
+\end{Proposition}
+
+Proposition \ref{prop:misiakcorollary15} allows us to make various choices of inner products on suitable operands. In the context of a sample we might choose for each vector to be an indexed set of deviations of the mean of instantiations of a random variable.\\
+
+It would be desirable to have normalized statistic onto an interval of $[-1,1]$ as we achieved with multilinear correlations earlier in this chapter. This is especially the case when the scale of the statistic is not readily interpreted. Misiak provided an inequality that sets bounds on the value that an $n$-inner product can take for a given set of vectors, which is given in Proposition \ref{prop:cauchyBunyakowskiinequalityarbitraryn} as the \textit{Cauchy-Bunyakowski inequality for arbitrary $n$}.\footnote{\cite{Misiak1989} did not give any indication as to why Bunyakowski's name is included in the name of this result.}\\
+
+\begin{Proposition}[myproposition=Cauchy-Bunyakowski Inequality for Arbitrary $n$ \cite{Misiak1989}, label=prop:cauchyBunyakowskiinequalityarbitraryn]
+For $\vec{a}, \vec{b}, \vec{x}_1, \cdots, \vec{x}_{n-1} \in V$,
+
+$$|(\vec{a}, \vec{b}| \vec{x}_1, \cdots, \vec{x}_{n-1})| \leq \sqrt{ \left(\vec{a}, \vec{a}| \vec{x}_1, \cdots, \vec{x}_{n-1} \right)} \sqrt{ \left(\vec{b}, \vec{b}| \vec{x}_1, \cdots, \vec{x}_{n-1} \right)} $$
+
+\tcbline
+\textbf{Proof}\\
+See Theorem 3 in \cite{Misiak1989}.
+\end{Proposition}
+
+With the above definitions and propositions, we can construct a new statistic called \textit{Misiak's correlation coefficient} (Definition \ref{def:misiakscorrelation}).\\
+
+\begin{Definition}[mydefinition=Misiak's Correlation Coefficient, label=def:misiakcorrelation]
+Given random variables $X,Y$ and $\{ Z_j \}_{j=1}^{n-1}$ their \underline{Misiak correlation} is given by
+
+$$R_{\text{Misiak}}[X, Y ; Z_1, \cdots, Z_{n-1}] \triangleq \frac{(X, Y | Z_1, \cdots, Z_{n-1})}{\sqrt{(X, X | Z_1, \cdots, Z_{n-1})} \sqrt{(Y, Y | Z_1, \cdots, Z_{n-1})} }$$
+
+where $( \bullet, \bullet | \bullet, \cdots, \bullet )$ is defined according to Proposition \ref{prop:misiakcorollary15} using $\mathbb{E}[U_i, U_k]$ as an inner product between any two random variables $U_i, U_k$ with finite second moments.
+\label{def:misiakscorrelation}
+\end{Definition}
+
+### Tren\v cevski-Mal\v ceski Correlation
+
+While $n$-inner products compare a pair of vectors or functions to a collection of other vectors or functions, a further generalization of this is possible that compares one collection of vectors or functions to another collection of vectors or functions. A \textit{generalized $n$-inner product space} was defined by \cite{trencevski2006}, which is given in Definition \ref{def:trencevskimalceski}.\\
+
+\begin{Definition}[mydefinition=Generalized $n$-Inner Product Space \cite{trencevski2006}, label=def:trencevskimalceski]
+Assume that $n$ is a positive integer, $V$ is a real vector space such that $\dim V \geq n$ and $\langle \bullet, \cdots, \bullet | \bullet, \cdots, \bullet \rangle$ is a real function on $V^{2n}$ such that
+
+\begin{itemize}
+	\item $\langle \vec{x}_1, \cdots, \vec{x}_n | \vec{x}_1, \cdots, \vec{x}_n \rangle > 0$ if $\vec{x}_1, \cdots, \vec{x}_n$ are linearly independent vectors,
+	\item $\langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle = \langle \vec{y}_1, \cdots, \vec{y}_n | \vec{x}_1, \cdots, \vec{x}_n \rangle$,
+	\item $\langle \lambda \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle = \lambda \langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle$,
+	\item $\langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle = -\langle  \vec{x}_{\sigma (1)}, \cdots, \vec{x}_{\sigma (n)} | \vec{y}_1, \cdots, \vec{y}_n \rangle$ for any odd permutation $\sigma$ on the set $\{1, \cdots, n \}$,
+	\item $\langle \vec{x}_1 + \vec{z}, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle = \langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle + \langle \vec{z}, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle$
+\end{itemize}
+
+for any $\vec{x}_1, \cdots, \vec{x}_n, \vec{y}_1, \cdots, \vec{y}_n \in V$ and $\lambda \in \mathbb{R}$.\\
+
+Then the function $\langle \bullet, \cdots, \bullet | \bullet, \cdots, \bullet \rangle$ is called a \underline{(generalized) $n$-inner product} and the pair $(V, \langle \bullet, \cdots, \bullet | \bullet, \cdot, \bullet \rangle)$ is called an \underline{$n$-prehilbert space}.
+\end{Definition}
+
+According to \cite{trencevski2006}, the $n$-inner product defined by \cite{Misiak1989} is a special case of the generalized $n$-inner product by the relation $$(\vec{x}, \vec{y} | \vec{z}_1, \cdots, \vec{z}_{n-1}) = \langle \vec{x}, \vec{z}_1, \cdots, \vec{z}_{n-1} | \vec{y}, \vec{z}_1, \cdots, \vec{z}_{n-1} \rangle.$$
+
+With a generalization of $n$-inner products as given in Definition \ref{def:trencevskimalceski} we desire a specific approach to defining examples of generalized $n$-inner products. \cite{trencevski2006} provide an analogous result to Proposition \ref{prop:misiakcorollary15} in the form of Proposition \ref{prop:trencevskiexample}.\\
+
+\begin{Proposition}[myproposition=\cite{trencevski2006}, label=prop:trencevskiexample]
+
+For every inner product $(\bullet, \bullet)$ on $V$, the function $\langle \bullet, \cdots, \bullet| \bullet, \cdots, \bullet \rangle$ defined on $V^{2n}$ by
+
+$$\langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n  \rangle \triangleq \begin{vmatrix}
+( \vec{x}_1, \vec{y}_1 ) & ( \vec{x}_1, \vec{y}_2 ) & \cdots & ( \vec{x}_1, \vec{y}_{n} ) \\ 
+( \vec{x}_2, \vec{y}_1 ) & ( \vec{x}_2, \vec{y}_2 ) & \cdots & ( \vec{x}_2, \vec{y}_{n} ) \\ 
+\vdots & \vdots & \ddots & \vdots \\
+( \vec{x}_{n}, \vec{y}_1 ) & ( \vec{x}_{n}, \vec{y}_2 ) & \cdots & ( \vec{x}_{n}, \vec{y}_{n} ) \\
+\end{vmatrix} $$
+
+is a generalized $n$-inner product on $V$.
+\tcbline
+\textbf{Proof}\\
+See Example 2.1 in \cite{trencevski2006}.
+\end{Proposition}
+
+It is also desirable to obtain a normalization of any function that is an example of Proposition \ref{prop:trencevskiexample}. Similar to Proposition \ref{prop:cauchyBunyakowskiinequalityarbitraryn} proven in \cite{Misiak1989}, \cite{trencevski2006} provide the analogous result as given in Proposition \ref{prop:trencevskiinequality} to obtain a normalization.\\
+
+\begin{Proposition}[myproposition=\cite{trencevski2006}, label=prop:trencevskiinequality]
+
+If $\langle \bullet, \cdots, \bullet | \bullet, \cdots, \bullet \rangle$ is a (generalized) $n$-inner product on $V$, then
+
+$$| \langle \vec{x}_1, \cdots, \vec{x}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle |  \leq \sqrt{\langle \vec{x}_1, \cdots, \vec{x}_n | \vec{x}_1, \cdots, \vec{x}_n \rangle} \sqrt{\langle \vec{y}_1, \cdots, \vec{y}_n | \vec{y}_1, \cdots, \vec{y}_n \rangle}$$
+
+for all $\vec{x}_1, \cdots, \vec{x}_n,  \vec{y}_1, \cdots, \vec{y}_n \in V$.
+
+\tcbline
+\textbf{Proof}\\
+See the first part of Theorem 2.1 in \cite{trencevski2006}.
+\end{Proposition}
+
+Taking our choice of inner product to be the mixed product moment between two random variables, and utilizing it to construct a normalized statistic we obtain Definition \ref{def:trencevskimalceskicorrelation}.\\
+
+\begin{Definition}[mydefinition=Tren\v cevski-Mal\v ceski Correlation Coefficient, label=def:trencevskimalceskicorrelation]
+Given two collections of random variables $\{ X_1, \cdots, X_n \}$ and $\{ X_1, \cdots, X_n \}$ their \underline{Tren\v cevski-Mal\v ceski correlation} is given by
+
+$$R_{\text{TM}}[X_1, \cdots, X_n; Y_1, \cdots, Y_n] \triangleq \frac{\langle X_1, \cdots, X_n | Y_1, \cdots, Y_n \rangle}{\sqrt{\langle X_1, \cdots, X_n | X_1, \cdots, X_n \rangle} \sqrt{\langle Y_1, \cdots, Y_n | Y_1, \cdots, Y_n \rangle} }$$
+
+where $\langle \bullet, \bullet | \bullet, \cdots, \bullet \rangle$ is defined according to Proposition \ref{prop:trencevskiexample} using $\mathbb{E}[U_i, U_k]$ as an inner product between any two random variables $U_i, U_k$ with finite second moments.
+\end{Definition}
+
+### Interpretation
+
+In terms of the Trinity of Covariation, making a substitution such as $U := U - \mathbb{E}[U]$ entails that the resulting determinants of matrices computed via either Proposition \ref{prop:misiakcorollary15} or Proposition \ref{prop:trencevskiexample} will be equivalent to computing the determinant of some covariance matrix. The covariance matrix itself is a quantification of coordinated change between pairs of variables, and its determinant does so in an aggregated way. Due to our usage of expectations of random variables, we can also leverage Proposition \ref{thm:prodmomentindependence} in knowing that statistical independence implies that such expectations should distribute across products of measureable functions of random variables. In the particular case of computing covariances, we know that $X \ind Y \implies \operatorname{Cov}[X,Y] = 0$.\\
+
+Definition \ref{def:misiakcorrelation} and Definition \ref{def:trencevskimalceskicorrelation} also tell us either about linear dependence or about spanning the same subspace through Proposition \ref{prop:trencevskilineardependence}.\\
+
+\begin{Proposition}[myproposition=\cite{trencevski2006}, label=prop:trencevskilineardependence]
+
+Equality holds in Proposition \ref{prop:trencevskiinequality} if-and-only-if at least one of the following conditions is satisfied
+
+\begin{itemize}
+	\item $\vec{x}_1, \cdots, \vec{x}_n$ are linearly dependent,
+	\item $\vec{y}_1, \cdots, \vec{y}_n$ are linearly dependent,
+	\item $\vec{x}_1, \cdots, \vec{x}_n$ and $\vec{y}_1, \cdots, \vec{y}_n$ span the same vector subspace of dimension $n$.
+\end{itemize}
+
+\tcbline
+\textbf{Proof}\\
+See the second part of Theorem 2.1 in \cite{trencevski2006}.
+\end{Proposition}
+
+If either of the first two conditions hold in Proposition \ref{prop:trencevskilineardependence} then the derived correlation coefficients will be indeterminant because both the left and the right hand sides of Proposition \ref{prop:trencevskiinequality} will be zero. Thus calculating the numerator and factors of the denominator of the Misiak and Tren\v cevski-Mal\v ceski correlation coefficients to check if linear dependence holds is recommended. In the remaining third case equality holds if the two collections of vectors span the same subspace, yielding a correlation score of $\pm 1$ depending on whether the orientation of the vectors is needed. Section 3 of \cite{trencevski2006} provides a discussion of how such a coefficient as given in Definition \ref{def:trencevskimalceskicorrelation} can be defined as a cosine of the angle between two subspaces which can be used to obtain a metric on subspaces of a vector space $V$ simply by taking the $\arccos$ to obtain the angle. They show that such an angle is invariant to choice of basis. Therefore inner correlation coefficients as we have defined in this section are a way of describing the "closeness" of two sets of random variables in a way that does not depend on scaling or translation.\\
+
+## Agnesian Operators
+
+We introduce Agnesian operators as an instantiation of the Trinity of Covariation that utilizes elementary calculus. We have named this family of operators after the Italian mathematician Maria Gaetana Agnesi (1718-1799) (Figure \ref{fig:mariaagnesi}(a))\cite{Dumbaugh2019}. She was the first woman to be appointed as a mathematics professor (Figure \ref{fig:mariaagnesi}(c)), and she was known for writing the textbook \textit{Instituzioni Analitiche ad uso della gioven\`{u} italiana}\footnote{English translation: \textit{Analytical Institutions for the use of Italian youth}.} (Figure \ref{fig:mariaagnesi}(b)) that covered both differential and integral calculus \cite{Dumbaugh2019}. Because the Agnesian operators unite the notions of derivatives and integrals into a single operator, it seems symbolically fitting that Maria Agnesi be their namesake because her work brought differential and integral calculus together in the education of young mathematicians.
+
+::: {#fig-maria-gaetana-agnesi layout-ncol=3}
+
+![Maria Gaetana Agnesia (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/5/57/Maria_Gaetana_Agnesi.jpg)
+
+![](https://upload.wikimedia.org/wikipedia/commons/1/1c/Il_frontispizio_delle_Instituzioni_analitiche_dell%27_Agnesi.png)
+
+![Agnesi's diploma from Università di Bologna (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/7/7b/Il_diploma_di_nomina_dell%27_Agnesi_all%27_Universit%C3%A0_di_Bologna.png)
+
+Maria Gaetana Agnesi
+:::
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+	(a) & (b) \\
+	\includegraphics[scale=0.5]{Maria_Gaetana_Agnesi.jpg} & \includegraphics[scale=1.1]{Agnesi_book.png} \\
+	\tiny \ccPublicDomain\ Public Domain & \tiny \ccPublicDomain\ Public Domain\\
+	\end{tabular}
+	
+	\begin{tabular}{c}
+	(c) \\
+	\includegraphics[scale=1]{Agnesi_diploma.png} \\
+	\tiny \ccPublicDomain\ Public Domain \\
+	\end{tabular}
+	\caption{(a) Portrait of Maria Gaetana Agnesi. (b) The first page of \textit{Instituzioni Analitiche ad uso della gioven\`{u} italiana}. (c) Maria Agnesi's diploma in mathematics from the University of Bologna.}
+	\label{fig:mariaagnesi}
+\end{figure}
+
+
+Derivatives are linear approximations of the slope of the line tanget to a function at a given point, providing a representation\footnote{To clarify our intended meaning of the word \textit{representation} for mathematicians, we are \textbf{not} using the word \textit{representation} here to mean a representation of a group. In this thesis we take it to mean a commonplace notion of showing certain aspect of one thing in terms of another.} of the change part of the Trinity of Covariation. In the case of intergrals, the definite integral over $[a,b]$, $\int_a^b \frac{df}{dt}dt = f(b) - f(a)$, models the net change \textit{via} the net change theorem. This idea is adopted to represent the change part of the Trinity of Covariation. We can choose collections of differentiable and/or integrable scalar functions to represent a kind of 'structure'. The notion of 'coordination' can be captured in the form of scalar multiplication in which one might think of a collection of changes mutually scaling each other. Putting these notions together, Definition \ref{def:totalagnesian} gives a precise definition of the (total) Agnesian operator of a given order.\footnote{A *partial* Agnesian operator is easily defined by replacing the total derivatives in Definition \ref{def:totalagnesian} by partial derivatives, which we denote $\mathcal{A}_{\partial t}^{k} S$.}
+
+> **Definition**
+>
+> Let $S = \{x_1(t),  \cdots, x_n(t) | x_j(t) \in \mathbb{R}, t \in \mathbb{R} \}$ be a collection of suitably smooth or integrable functions of a real parameter $t$, then their **Agnesian of order $k$** is given by
+> $$\mathcal{A}_{t}^{k} S= \begin{cases} \prod_{j=1}^{n} \frac{d^k}{dt^k}x_j(t) & k > 0 \\ \prod_{j=1}^{n} x_j (t) & k = 0 \\ \prod_{j=1}^{n} \underbrace{\int \cdots \int}_k x_j(t)\ \underbrace{dt \cdots dt}_k & k < 0. \end{cases}$$
+
+
+Because the Agnesian is defined using set-builder notation, it is possible to construct a great variety functions with it. For a given collection of $n$ suitably smooth or integrable functions, there exists $|\mathcal{P}(S)/\emptyset| = 2^n-1$ (i.e. the powerset excluding the empty set)\footnote{If empty sets are considered, we find it natural to suggest that $\mathcal{A}_{t}^{k} \emptyset := 0$.} possible choices of Agnesian functionals that could be defined at some given order. For convenience of notation, we can consider Agnesian operators of scalar functions and vector functions.\footnote{We can further consider Agnesian operators of matrices and multidimensional arrays of functions by using compositions of pairing functions. Such pairing functions $\phi : \mathbb{N}^n \mapsto \mathbb{N}$ achieve a one-to-one mapping between a multi-index function and an index function.} For a scalar function $f(t)$ we will assume that notation $\mathcal{A}_t^k f(t)$ is equivalent to $\mathcal{A}_t^k \{ f(t) \}$. In the vector case we will take  $\mathcal{A}_t^k \vec{x}(t)$ where the components of $\vec{x}(t)$ are indexed by $j \in \{1, \cdots, n \}$ to be equivalent to $\mathcal{A}_t^k \{x_1(t), \cdots, x_n(t) \}$. These two notational conventions immediately gives us the property that $\mathcal{A}_t^k \vec{x}(t) = \prod_{j=1}^n \mathcal{A}_t^k x_j(t)$, which is used in the proof of Proposition \ref{prop:agnesiansqueezeinvariant}.
+
+Let us consider the example of a helix embedded in $\mathbb{R}^3$ according to the vector equation
+
+$$\vec{s}(t) = \begin{bmatrix}
+\cos t \\
+\sin t \\
+t \\
+\end{bmatrix}.$$
+
+Figure \ref{fig:Agnesianhelixpanel} shows the Agnesians of a helix for orders $k \in \{-3, -2, -1, 0, 1, 2\}$, and illustrates how the order specifies different curves. The zero-order Agnesian in Figure \ref{fig:Agnesianhelixpanel}(a) has reflective symmetry about $t=0$ and will oscillate between larger amplitudes as $|t| \rightarrow \infty$. The first-order Agnesian in Figure \ref{fig:Agnesianhelixpanel} is equivalent to $\frac{1}{2} \sin 2t$, which is a reflection equivariant function (i.e. an odd function) in $t$. As shown in Figure \ref{fig:Agnesianhelixpanel} (c), the second-order Agnesian is zero for all time because the $\frac{d^2 t}{dt^2} = 0$ factor. Indeed, any Agnesian of this helix in the given coordinates will be zero if $k \geq 2$. Panels (d), (e), and (f) of Figure \ref{fig:Agnesianhelixpanel} show that with constants of integration taken to be zero we have an alternating pattern of odd or even Agnesians depending on the parity of the degree of the polynomial factor $\frac{t^{k+1}}{(k+1)!}$. For $k < 0$, if $k+1$ is even then the result Agnesian is an odd function of $t$, and if $k+1$ is even then the resulting Agnesian will be odd. Similar to what we observed with the zero-order Agnesian, we find that the negative order Agnesians of this helix will oscilate between larger amplitudes as $|t| \rightarrow \infty$.\\
+
+Obtaining a scalar function of time affords us the opportunity to ask elementary questions about the function. Such questions include its domain, image, and extrema. While all of the Agnesian curves in the previous example were defined over all real numbers, this does not need to be the case in general. An example is the curve $[t, \log t]^T$ which will not be defined for $t=0$. The example of the helix also showed us that some Agnesians have local and global optima, while others have no finite global optima.\\
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{cc}
+(a) & (b) \\
+\includegraphics[scale=0.4]{./agenesian_helix/zeroeth.pdf} & \includegraphics[scale=0.4]{./agenesian_helix/first.pdf} \\
+(c) & (d) \\
+ \includegraphics[scale=0.4]{./agenesian_helix/second.pdf} & \includegraphics[scale=0.4]{./agenesian_helix/negative_first.pdf} \\
+ (e) & (f) \\
+ \includegraphics[scale=0.4]{./agenesian_helix/negative_second.pdf} &  \includegraphics[scale=0.4]{./agenesian_helix/negative_three.pdf}\\
+\end{tabular}
+\caption{Agnesians of different orders of a helix plotted on the interval of $t \in [-2 \pi, 2 \pi ]$. (a) Order zero ($k=0$). (b) Order one ($k=1$). (c) Order two ($k=2$). (d) Order negative one ($k=-1$), with constants of integration set to zero. (e) Order negative two ($k=-2$), with constants of integration set to zero. (f) Order negative three ($k=-3$), with constants of integration set to zero.}
+\label{fig:Agnesianhelixpanel}
+\end{figure}
+
+In the example of the helix we assumed a given coordinate system. It is important to consider that the Agnesian of a parametric curve is not invariant to linear changes in basis. For a parametric curve $\vec{x}(t) \in \mathbb{R}^n$ and linear transformation $T \in \mathbb{R}^{n \times n}$, it does not hold in general that $\mathcal{A}_t^k \left[ T \vec{x}(t) \right] = \mathcal{A}_t^k \left[ \vec{x}(t) \right]$. There exist invariants for the Agnesian of parametric curves in $\mathbb{R}^{2}$ including rotations of $\pi$ radians, squeezing, and permutation. The identity matrix is a permutation matrix, and clearly leaves the curve unchanged. In Proposition \ref{prop:agnesiansqueezeinvariant} we show that multidimensional squeezing is an invariant of the Agnesian operator.
+
+> **Proposition**
+>
+> Let $\vec{x}(t) \in \mathbb{R}^n$ be a parametric curve and $D \in \mathbb{R}^{n \times n}$ be a diagonal matrix with constant entries and $\det D = 1$, then
+>
+>
+> $$\mathcal{A}_t^k \left[ D \vec{x}(t) \right] = \mathcal{A}_t^k \left[ \vec{x}(t) \right].$$
+> 
+> **Proof**
+>
+> Taking $$
+>  D =
+>  \begin{bmatrix}
+>    d_{1} & & \\
+>    & \ddots & \\
+>    & & d_{n}
+>  \end{bmatrix}$$
+>  
+> and $$\vec{x}(t) = \begin{bmatrix}
+> x_1(t) \\
+> \vdots \\
+> x_n(t)
+> \end{bmatrix}$$
+>
+> then $$D \vec{x}(t) = \begin{bmatrix}
+> d_1 x_1(t) \\
+> \vdots \\
+> d_n x_n(t)
+> \end{bmatrix}.$$ This entails that 
+>
+> \begin{align*}
+> \mathcal{A}_t^k \left[ D \vec{x}(t) \right] =& \prod_{j=1}^n d_j \mathcal{A}_t^k x_j(t) \\
+> =& \left( \prod_{j=1}^n d_j \right) \left( \prod_{j=1}^n \mathcal{A}_t^k x_j(t) \right) \\
+> =& \det D \mathcal{A}_t^k \left[ \vec{x}(t) \right] \\
+> =& \mathcal{A}_t^k \left[ \vec{x}(t) \right]
+> \end{align*}
+>
+> $\blacksquare$
+
+What these invariant linear transformations have in common is that they have determinant of unity. This suggests a hypothesis that the property of being volume-preserving might be a necessary-but-insufficient condition for an operation to be Agnesian-preserving, but we do not explore this hypothesis further in this thesis.
+
+The Agnesian provides a scalar function of a single parameter, which could be time, length, or some other variable. It is sometimes desirable to incorporate multiple parameters, like when there is one parameter of time and three directions of physical space. An extension to the Agnesian operator comes from considering coordinated change in multiple parameters in the form of the *multiagnesian* as given in Definition \ref{def:multiagnesian}.
+
+> **Definition**
+>
+>  Let $S = \{x_1(t_1, \cdots, t_p),  \cdots, x_n(t) | x_j(t_1, \cdots, t_p) \in \mathbb{R} \land t_1, \cdots, t_p \in \mathbb{R} \}$ be a collection of suitably smooth or integrable functions of a real parameters $t_1, \cdots, t_p$, then their \underline{multiagnesian of order $k$} is given by
+\begin{equation*}
+	\mathcal{A}_{(t_1, \cdots, t_p)}^{k} S = \begin{cases} \prod_{j=1}^{n} \prod_{w=1}^{p} \frac{d^k}{dt_{w}^k}x_j(t_1, \cdots, t_p) & k > 0 \\ \prod_{j=1}^{n} \prod_{w=1}^{p} x_j (t_1, \cdots, t_p) & k = 0 \\ \prod_{j=1}^{n} \prod_{w=1}^{p} \underbrace{\int \cdots \int}_k x_j(t_1, \cdots, t_p)\ \underbrace{dt_{w}  \cdots dt_{w}}_k & k < 0 \end{cases}
+\end{equation*}
+
+The multiagnesian operator is a natural generalization of the Agnesian operator to include multiple parameters. While the Agnesian operator can be used to study parametric curves in finite-dimensional vector spaces, the multiagnesian operator can be used to study surfaces and hypersurfaces in similar spaces. Using the commutativity and associativity of scalar multiplication, we can readily find that a multiagnesian is the product of Agnesian operators with respect to each parameter:\footnote{We adopt similar conventions for multiagnesians of scalar functions and vectors functions as we have for Agnesians.}
+
+$$\mathcal{A}_{(t_1, \cdots, t_p)}^{k} \vec{x}(t_1, \cdots, t_p) = \prod_{w=1}^p \mathcal{A}_{t_w}^k \vec{x}(t_1, \cdots, t_p).$$
+
+We have defined the Agnesian operator, and given some exemplification and discussion of it in mathematical language. In the next subsection we will offer some further interpretations of this operator.
+
+### Interpretation
+
+The Agnesian operators can be understood in terms of mutually scaling change. Due to the product expansion in the definition of an Agnesian, it is clear that a collection of quantities are mutually scaling each other, and the order tells us what sort of quantities are performing this scaling. For positive order $ k > 0$ we are considering how a collection of derivatives of a corresponding order are mutually scaling. A zero-order Agnesian quantifies how large the functions are together at some value of the parameter. And for the case of negative orders we are considering the coordinated net changes in a collection of functions with respect to the parameter. Decreasing the order below $k=-1$ leads to net changes in net changes, etc, depending on the value of $k$.\\
+
+A picture that comes from taking the product of a collection of scalars is to consider an $n$-dimensional box whose lengths are equal to the $n$ scalars being multiplied. The product of these scalars would then be the signed volume of the box. For $n \leq 3$ we can draw pictures to motivate what this looks like. Let us suppose an example where $\{ f(t), g(t) \}$ is our set of functions of time. Figure \ref{fig:agnesianbox} illustrates a hypothetical planar curve whose coordinates are defined by $\left( \mathcal{A}_t^k f(t), \mathcal{A}_t^k g(t) \right)$. For a given point on this curve there exists a rectangular region between it and the origin. The signed area of this rectangle gives the value of $\mathcal{A}_t^k\{ f(t), g(t) \}$. The sign of the Agnesian operator follows a similiar pattern to that illustrated in Figure \ref{fig:quadrantcorr} and Table \ref{tab:orthantsign} describing the behaviour of multilinear correlation in the sense that multiplying scalars with particular combinations of positive and negative sign result in a scalar with a parciular sign. Unlike the multilinear correlation function, the Agnesian operator as we have defined above does not consider any random variables.\\
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+	(a) & (b) \\
+	\includegraphics[scale=0.48]{./agnesian_box_interpretation/agnesian_box.pdf} & \includegraphics[scale=0.48]{./agnesian_box_interpretation/agnesian_beside_box.pdf} \\
+	\end{tabular}
+	\caption{Visual interpretation of the Agnesian operator of two functions as signed volumes of rectangles. The red corresponds to positive area, and the blue corresponds to negative area. (a) Illustration of rectangles representing the signed volumes of the Agnesian of two parametric functions. There exists four boxes corresponding the rectangular regions between the origin at $t=0$ out to $t=\pm \frac{1}{2}$ or $t=\pm \frac{3}{4}$. (b) Agnesian of both functions.}
+	\label{fig:agnesianbox}
+\end{figure}
+
+We noted earlier that Agnesian operators are not invariant to linear changes in basis in general. This mathematical fact can be related back to the Trinity of Covariation: the amount of coordinated change as quantified by the Agnesian operator depends on from what perspective we are `looking' at the structure.\\
+
+We have introduced the Agnesian operator as an instance of the Trinity of Covariation and as an integro-differential operator. In the next section we will introduce grade entropies as an instance of the Trinity of Covariation that connects the subjects of information theory and order theory.
+
+## Grade Entropies
+
+In this section we will introduce a family of functions called \textit{grade entropies}. Because entropy is an often-misunderstood concept, we provide some historical context and review of mathematical definitions and properties to clarify it sufficiently for understanding the concept of grade entropy. Then we will review grade functions in the context of partially ordered sets and relate them to entropy. Finally we discuss the interpretation of grade entropies and how they relate to the Trinity of Covariation.
+
+### Entropy
+
+The first notions that would become a formal model of entropy were developed by Rudolf Clausius (Figure \ref{fig:foundersentropy}(a)), which he described as the \textit{transformational content} of a body in terms of the reciprocal temperature integrated over a heat differential \cite{clausius1867}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{ccc}
+	(a) & (b) &  \\
+	\includegraphics[scale=0.4]{rudolf_clausius.jpg} & \includegraphics[scale=0.905]{ludwig_boltzmann.jpg} & \\
+	{\tiny \href{https://commons.wikimedia.org/wiki/File:Clausius.jpg}{\ccPublicDomain\ Public Domain}} & {\tiny \href{https://commons.wikimedia.org/wiki/File:Boltzmann2.jpg}{\ccPublicDomain\ Public Domain}} &  \\
+	(c) & (d) & (e) \\
+	\includegraphics[scale=0.5]{josiah_gibbs.jpg} & \includegraphics[scale=0.355]{claude_shannon.jpg} & \includegraphics[scale=0.222]{JohnvonNeumann.png} \\
+	{\tiny \href{https://commons.wikimedia.org/wiki/File:Josiah_Willard_Gibbs_-from_MMS-.jpg}{\ccPublicDomain\ Public Domain}} & {\tiny \href{https://commons.wikimedia.org/wiki/File:ClaudeShannon_MFO3807.jpg}{CC BY-SA 2.0 de}} & {\tiny ©   \href{https://www.lanl.gov/resources/web-policies/copyright-legal.php}{Los Alamos National Laboratory}$^{\dagger}$}\\
+	& {\tiny Credit: Konrad Jacobs} &  {\tiny Credit: Los Alamos National Laboratory}\\
+	\end{tabular}
+	\caption{The founders of the modern notions of entropy. (a) Rudolf Clausius. (b) Ludwig Boltzmann. (c) Josiah Gibbs. (d) Claude Shannon. (e) John von Neumann (Hungarian name: Neumann János Lajos).}
+	\label{fig:foundersentropy}
+
+{\tiny \begin{singlespace}$^{\dagger}$Unless otherwise indicated, this information has been authored by an employee or employees of the Los Alamos National Security, LLC (LANS), operator of the Los Alamos National Laboratory under Contract No. DE-AC52-06NA25396 with the U.S. Department of Energy. The U.S. Government has rights to use, reproduce, and distribute this information. The public may copy and use this information without charge, provided that this Notice and any statement of authorship are reproduced on all copies. Neither the Government nor LANS makes any warranty, express or implied, or assumes any liability or responsibility for the use of this information. \end{singlespace}}
+\end{figure}
+
+Entropy was formalized as a function of the number of possible microscopic states (i.e. microstates) in the context of statistical thermodynamics by Ludwig Boltzmann (Figure \ref{fig:foundersentropy}(b)) in his efforts to relate the average kinetic energy of gas particles to the thermodynamic temperature of the gas \cite{Uffink2022}. Each microstate represents the physical configuration of a part of a physical system, such as the orbital states of electrons in atoms, that are associated with an energy level.
+
+> **Definition**
+>
+>  **Boltzmann's entropy** equation is given by 
+\begin{equation*}
+	S \triangleq k_B \ln \Omega
+\end{equation*}
+where $S$ is the (thermodynamic) entropy, $k_B$ is the Boltzmann constant taking the exact value of $1.380649 \times 10^{-23}\ \frac{\text{J}}{\text{K}}$ in units of Joules-per-Kelvin, and $\Omega$ is the number of equilibrium microstates of a system.
+
+Definition \ref{def:boltzmannentropy} assumes that each microstate is equally probable, which is the case when a system is already in thermodynamic equilibrium. To describe the entropy of systems in which not all states are equally probable, a generalization of Definition \ref{def:boltzmannentropy} given in Definition \ref{def:gibbsentropy}  was developed by Josiah Gibbs (Figure \ref{fig:foundersentropy}(c)) (@Jaynes1965).
+
+> **Definition**
+>
+>  Gibbs's entropy equation is given by 
+\begin{equation*}
+	S \triangleq -  k_B \sum_i p_i \ln p_i
+\end{equation*}
+where $S$ is the (thermodynamic) entropy, $k_B$ is the Boltzmann constant as found in Boltzmann's entropy, and $p_i$ is the probability of the $i$th state from a finite set of physical states.
+
+In 1948 entropy was generalized beyond the context of Physics by Claude Shannon (Figure \ref{fig:foundersentropy} (d)) to a purely mathematical construct that has applications in many domains. This generalization, sometimes called Shannon-Wiener entropy, is given in Definition \ref{def:shannonentropy}. Jon von Neumann (Figure \ref{fig:foundersentropy} (e)) adapted this definition to the context of quantum mechanics, which we do not explore further here.
+
+> **Definition**
+> Shannon's entropy equation is given by 
+\begin{equation*}
+	S \triangleq -  K \sum_i p_i \ln p_i
+\end{equation*}
+where $S$ is the Shannon entropy, $K$ is a proportionality constant, and $p_i$ is the probability of the $i$th event from a discrete event space.
+
+The differences between Definition \ref{def:gibbsentropy} and Definition \ref{def:shannonentropy} are simple, subtle, but also of great importance. The first difference is explicit: we exchange the Boltzmann constant $k_B$ for an arbitrary proportionality constant $K$. This proportionality constant is often taken to be unity in applications of Definition \ref{def:shannonentropy}, however in principle it could be used to scale the log-linear factor onto a desired measurement scale. The second difference is less explicit, but of great practical significance: the probability measure can be over *any* discrete random variable.
+
+Since entropy in a general sense is not about thermodynamic states *per se*, it is worth considering what it actually tells us about a discrete random variable. Often entropy is heuristically described as a "measure of disorder", but this way of describing entropy has limitations that are outlined in @Lambert2002. Among them are the observations that maximal entropy distributions can generate ordered structures, and that subjective disagreement between observers can occur over what consistutes 'disorder'.
+
+Since entropy (specifically Shannon's entropy) has a specific mathematical definition, it is worth considering one of its important properties in the form Proposition \ref{prop:maxentropy}.
+
+> **Proposition**
+>
+> Given a discrete random variable $X$ with probability space $(\Omega, \mathcal{F}, P)$, its Shannon entropy $H(X)$ satisfies
+>
+> $$H(X) \leq \log |\Omega| $$
+>
+> where $H(X) \leq \log |\Omega| $ if-and-only-if $P$ is uniform.
+>
+> **Proof**
+>
+> See Theorem 2.6.4 in @Thomas2006.
+
+Proposition \ref{prop:maxentropy} gives us a specific way to think about what Shannon entropy quantifies: uniformity of the distribution of a discrete random variable. Abstracting entropy beyond the context of thermodynamics and taking this precise notion that quantifies uniformity will be important for understanding grade entropy.
+
+Let us briefly consider an example of applying the mathematical concept of entropy outside of thermodynamics that comes from ecology. In ecology, a community is a collection of populations. In the analysis of species abundance tables it is desirable to quantify the 'diversity' of a community of organisms.
+
+::: {.callout-note collapse="true"}
+## What is a species abundance table?
+A species abundance table is a matrix whose entries are the count of how many times each species was observed in each sample.
+
+:::
+
+Entropy is one method of quantifying diversity if we consider diversity in the sense of uniformity of species abundances. The species abundance table gives us an empirical frequency distribution with discrete support. Computing the Shannon entropy from this distribution tells us how uniform the species abundances are in the community.
+
+In summary we have noted that entropy was originally motivated and developed within the context of physics, and was later generalized to any discrete probability distribution. Rather than quantifying 'disorder' as a synonym for 'macroscopic messiness', Shannon entropy tells us about the uniformity of a discrete random variable.
+
+### Grades and Partially-Ordered Sets
+
+Before introducing grade entropies, we will briefly review the properties of relations. All partial orders are relations. A relation is a subset of a Cartesian product of sets. Given a collection of sets $S_1,\cdots, S_n$, a relation $R \subseteq S_1 \times S_2 \times \cdots \times S_{n-1} \times S_n$ is said to be *homogenous* if all pairs of sets are equal. Otherwise such a relation is *inhomogenous*. Relations are also classified by the number of sets being used in the set multiplication. A *binary relation* is a subset of the Cartesian product of two sets, and more generally an *$n$-ary relation* is obtained from taking a subset of the Cartesian product of $n$ sets. In this section we focus on binary relations. Beyond these distinctions, many relations are classified by certain rules about which elements of a set are allowed to be members of the relation.
+
+The rows of Table \ref{tab:relationproperties} show some common types of relations or relation properties including reflexivity, symmetry, antisymmetry, asymmetry, transitivity, and connectedness. These properties in certain combinations give partial orders, strict partial orders, total orders, and strict total orders.
+
+| Property             | Expression                                      | Partial Order | Strict Partial Order | Total Order | Strict Total Order |
+|----------------------|--------------------------------------------------|---------------|----------------------|-------------|---------------------|
+| Reflexive            | $xRx$                                         | ✓             |                      | ✓           |                     |
+| Irreflexive          | $\neg x R x$                                   |               | ✓                    |             | ✓                   |
+| Symmetric            | $x R y \implies y R x$                         |               |                      |             |                     |
+| Antisymmetric        | $x R y \land y R x \implies x = y$             | ✓             |                      | ✓           |                     |
+| Asymmetric           | $x R y \implies \neg y R x$                    |               | ✓                    |             |                     |
+| Transitive           | $x R y \land y R z \implies x R z$            | ✓             | ✓                    | ✓           | ✓                   |
+| Connected            | $x \neq y \implies x R y \lor y R x$           |               |                      |             | ✓                   |
+| Strongly Connected   | $x R y \lor y R x$                             |               |                      | ✓           |                     |
+
+: Summary of common types of order relations. The listed properties are assumed to hold for all $x, y, z$ as needed from a set $S$ whose binary relation $R$ is a subset of $S \times S$. {#tbl-relation-properties}
+
+The familiar comparisons $a < b$ and $a \leq b$ with real numbers make clear that orders exist in one dimension. But in this work we are interested in orders over sets of multidimensional points. One approach is to find a map $f:\mathbb{R}^n \mapsto \mathbb{R}$ and compare $f(\vec{x}) < f(\vec{y})$ for any $\vec{x}, \vec{y} \in \mathbb{R}^n$. A common choice for $f$ is a norm, such as the Euclidean norm. Beyond such function-induced orders, three possibilities include product orders, Pareto orders, and lexicographical orders.
+
+A \textit{product order} is satisfied by the componentwise comparisons all being satisfied. For vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$, they satisfy a strict product order if $x_i < y_i$ for all $i \in \{1, \cdots, n \}$. Similarly, they satisfy a non-strict product order if $x_i \leq y_i$ for all $i \in \{1, \cdots, n \}$.
+
+A \textit{Pareto order} does not have a strict or non-strict form because it already requires both strict and non-strict componentwise comparisons. For vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$, they satisfy a Pareto order if $x_i \leq y_i$ for all $i \in \{1, \cdots, n \}$ \textbf{and} there exists $j \in \{1, \cdots, n \}$ such that $x_j < y_j$. A Pareto order is more restrictive than a non-strict product order, but less restrictive than a strict product order, in the sense of what fraction of an arbitrary finite set would satisfy the relation. Pareto orders are applied in finance (@Amershi1985), game theory (@Aubin2014), and multiobjective optimization (@Emmerich2018).
+
+A *lexicographical order* is a kind of ordering that prioritizes comparing certain components before others. An example of a lexicographical order is the use of an alphabet to order words. The alphabet itself is an order on the characters, while the lexicographical order entails looking to compare the first two letters, then the second two, etc. As an example, suppose we had the points $a = (2,1)$ and $b=(1,3)$. Under a lexicographical ordering it holds that $b < a$ because the first component is compared first, and further components are irrelevant beyond the ealiest component that breaks the tie between the points. Lexicographical orders can be strict or non-strict, and are frequently used to define the conditions under which a collection of strings are sorted.
+
+Next we will give some background to the notion of grades (i.e. ranks) on points based on a given partial order.
+
+### Graded Posets
+
+For the construction of the notion of grade entropies we make use of grades of points. Given a finite collection of multidimensional points, which may possibly be a statistical sample from a population, we can use a partially ordered set (i.e. a poset) to assign a rank to each point. A point dominanted by no other point would have a rank of 1, a point dominated by one point would have a rank of two, and a point dominated by $k$ number points would have a rank of $k+1$.
+
+::: {.callout-note}
+This description of assigning ranks according to point dominance is sufficient for what we later term a *pseudograde* function, and that a covering relation provides the constraint needed to obtain a *grade* function.
+:::
+
+Before defining a graded partially ordered set (i.e. a graded poset), it is convenient to define the notion of a covering relation as given in Definition \ref{def:coveringrelation}.
+
+> **Definition** (@Stanley2011)
+>
+> Suppose $S$ is a set with a partial order $\leq$, and strict partial order $<$ that holds whenever $x \leq y \land x \neq y$.
+>
+> The **covering relation**, denoted $x \lessdot y$ for $x,y \in S$, holds if $x < y$ and there does not exist $z \in S$ such that $x < z < y$.
+
+A covering relation captures an intuitive notion that certain elements are "beside each other", which is closely related to the notion of a successor function. A successor function sends a natural number to the next natural number by incrementing by unity, while the predecessor function sends a natural number to the previous natural number by subtracting unity. For a graded poset (Definition \ref{def:gradedposet}) it is assumed that if two elements are beside each other in the covering relation, then their grades should correspondingly be predecessors or successors of each other.
+
+
+> **Definition** (@Stanley2011)
+>
+> Let $S$ be a partially ordered set equipped with a rank function $\rho: S \mapsto \mathbb{N}$, where $\rho$ satisfies the following:
+\begin{itemize}
+	\item $x,y \in S \land x < y \implies \rho(x) < \rho(y)$
+	\item $x,y \in S \land x \lessdot y \implies \rho(x) + 1 = \rho(y)$
+\end{itemize}
+where $\lessdot$ is a covering relation on $S$. Such a partially ordered set is called a \underline{graded poset} or \textit{graded partially ordered set}.
+
+What Definition \ref{def:gradedposet} provides is a clear notion of grading a collection of points under the assumption of a partial order, that these grades preserve the order, and preserve closeness in the sense of a covering relation.
+
+With these notions in place, we will now construct the notion of a grade entropy.
+
+### Grade Entropies
+
+Grade entropies are about quantifying the totality of a partial order or a strict partial order. Traditionally a given order relation is total, or it isn't total, with no consideration of how close a relation is to being total. But we suggest that it is desirable to quantify how far short a partial order falls from being a total order, which we informally refer to here as "totality"
+
+::: {.callout-note}
+In this work we take an information theory approach to quantifying totality, but it may also be possible to approach this notion with metric spaces.
+:::
+
+> **Definition**
+>
+> Suppose that $S \subset	\mathbb{R}^n$ is a finite set of points of size $|S|=m$ that is also a graded poset. With a grade function $g$, and probability mass function $p$ over $g$ we define the \underline{grade entropy} to be
+>
+> $$H_g \triangleq - \sum_{i=1}^{k} p(g_i)  \log_b  p(g_i) $$
+>
+> where $b$ is a chosen base, $g_i$ is a distinct grade assigned to any element of a partition $S_i$ of $S$, and $k$ is the number of distinct grades assigned to elements of $S$.
+
+It may be desirable to compare grade entropies computed on different systems, but the non-negative real number that results from computing grade entropy in Definition \ref{def:gradeentropy} depends on $m$. We can utilitize Proposition \ref{prop:maxentropy} to define a normalized grade entropy as given in Definition \ref{def:normalizedgradeentropy}.
+
+> **Definition**
+> Given a grade entropy function $H_g$, the **normalized grade entropy** is given by
+>
+> $$H_{\gamma} \triangleq \frac{H_g}{\log_b |m|}$$
+>
+> where $b$ is the same base used in $H_g$ and $m$ is the number of points
+
+The normalization in Definition \ref{def:normalizedgradeentropy} provides a functional with similar properties to the grade entropy in Definition \ref{def:gradeentropy}, but with the additional property of being bounded to the interval $[0,1]$. This allows comparisons of grade entropies for variables with different sizes of outcome space, and also makes it clear that the entropy has reached its maximum when the normalized grade entropy is equal to unity.
+
+
+Note that Definition \ref{def:gradeentropy} does not suppose what partial order is used, nor does it suppose which probability distribution is used. One might wish to use product orders, lexicographical orders, Pareto orders, or others. And one might wish to consider either empirical or theoretical discrete probability distributions. Grade entropies allow the researcher to choose the order relation and probability distribution that is relevant to their chosen domain.
+
+One limitation of grade entropies is they do not distinguish between partially ordered sets with slightly different non-dominating pairs. Let us consider panel (b) of Figure \ref{fig:examplegradeentropy} as an example. Nodes \texttt{e} and \texttt{d} would be assigned equal grades, and nodes \texttt{c} and \texttt{b} would also be assigned equal grades. If the edge \texttt{e}$\rightarrow$\texttt{b} was also part of the relation this would not change the aforementioned grades, but sometimes it may be desirable to distinguish between these two versions of the lattice. This motivates a generalization of grade entropies that we term \textit{pseudograde entropies}, which is achieved by first defining a *pseudograded poset* by taking Definition \ref{def:gradedposet} and simply dropping the requirement that $x,y \in S \land x \lessdot y \implies \rho(x) + 1 = \rho(y)$. The definition of a pseudograde entropy is then identical to Definition \ref{def:gradeentropy} except that a pseudograde function is used instead of a grade function.
+
+::: {.callout-note}
+A normalized pseudograde entropy is similarly obtained *mutatis mutandis.
+:::
+
+Next we consider how to interpret what a grade entropy tells us about a finite set of points.
+
+### Interpretation
+
+In this subsection we offer a general interpretation of grade entropies that should apply regardless of the choice of partial order or distribution of grades.\\
+
+Proposition \ref{prop:maxentropy} entails that the grade entropy is maximized when the distribution of grades is uniform. If the grade entropy is maximal for a collection of $m$ points, then the probability measure for each grade is $\frac{1}{m}$ for each of the $m$ points. If we take our probability to be a normalized counting measure over the set of points, then we must conclude that there is exactly one point per grade. If every point has a distinct grade, then we can equivalently state that no two points share a grade.\\
+
+If no two points share a grade, then the partial order is also a total order. With the grade entropy being maximized by this uniformity, it can be considered a quantification of the totality of the partial order. Example \ref{fig:examplegradeentropy} illustrates three cases including one in which the partial order is also total, a case where it is not completely total but also has some degree of totality, and a third case in which there is no totality (i.e. no dominance of one point over another).
+
+\begin{figure}[H]
+\begin{tabular}{c|c|c}
+(a) & (b) & (c) \\
+\includegraphics[scale=0.3]{./partial_total_order/totalorder.gv.pdf} & \includegraphics[scale=0.3]{./partial_total_order/partialorder.gv.pdf} &  \includegraphics[scale=0.3]{./partial_total_order/noorder.gv.pdf} \\
+\includegraphics[scale=0.3]{./partial_total_order/hist_uniform.pdf} & \includegraphics[scale=0.3]{./partial_total_order/hist_partialorder.pdf} & \includegraphics[scale=0.3]{./partial_total_order/hist_nonorder.pdf} \\
+\includegraphics[scale=0.3]{./partial_total_order/pseudo_hist_uniform.pdf} & \includegraphics[scale=0.3]{./partial_total_order/pseudo_hist_partialorder.pdf} & \includegraphics[scale=0.3]{./partial_total_order/pseudo_hist_nonorder.pdf} \\
+\end{tabular}
+\caption{Informal drawings of lattices representing partially ordered sets, a corresponding distribution of grades below in blue, and a corresponding distribution of pseudogrades at the bottom in red. (a) Total order in which the normalized grade entropy and normalized pseudograde entropy is equal to one. (b) Non-total partial order with a normalized grade entropy  and normalized pseudograde entropy not equal to either zero or one. (c) Non-total partial order with a grade entropy and pseudograde entropy equal to zero.}
+\label{fig:examplegradeentropy}
+\end{figure}
+
+We can further interpret grade entropies in a way that depends on the choice of order. Let us consider a product order over a finite collection of points in $\mathbb{R}^n$ as an example. If the grade entropy is zero, then for every pair of points there must exist at least one component that violates the comparison. Thus a grade entropy of zero for such a product order tells us that the collection of variables is not comonotonic. A collection of variables are comonotonic if they go up or down together whenever one them goes up or down in value.\footnote{When there exists two variables in which one always decreases as the other increases, and *vice versa*, this is called *antimonotonicity*. We are not aware of a term for the case in which some variables within a collection of variables are comonotonic while others are antimonotonic, but we suggest the term *anticomonotonic* suitably suggests this mixture. Likewise, if the grade entropy is at its maximum then the product order holds for all pairs of points, which entails perfect comonotonicity among those variables. Intermediate values of grade entropy between zero and its maximum would suggest to us a quantification of comonotonicity of a set of variables.
+
+Comonotonicity is related to the Trinity of Covariation when we consider a partial order on points whose components are variables. If the order is total, then the variables must go up and down together in such a way that always satisfies the order relation. Likewise, when the order is entirely non-total the variables never go up and down together in a way that satisfies the order. The *change* part is implicit in considering the point-to-point comparisons for all points. The \textit{coordination} part comes from such points be specified by coordinates represented by the components of each tuple.\footnote{The notions of grade entropy and pseudograde entropy do not actually *require* that the partial order in consideration be on a set of multidimensional points. Our discussion in terms of points with components is primarily with a view toward analyzing a data matrix, but it is sufficient to construct an order lattice by other means.} The *structure* part comes from the notion of a partial order existing on the collection of points.
+
+Interpreting pseudograde entropies is similar to interpreting grade entropies. It holds that a total order maximizes its value, and if no point dominates another then it will take its minimum value of zero. But pseudograde entropies may be larger than their grade entropy counterpart for a given partially ordered set.
+
+Having introduced grade entropies, pseudograde entropies, and their interpretation, we will next summarize the chapter.
+
+## Conclusion
+
+In this chapter we introduced multilinear correlation coefficients, Nightingale covariance, inner correlations, Agnesian operators, and grade entropies. 
+
+Each of these families of functions are an instantiation of the Trinity of Covariation in its own way. Mulilinear correlation relies as averaging over multiplications of random variables, and make use of a recently-proved normalization that generalized the Cauchy Schwarz inequality. Nightingale correlation is similar to multilinear correlations, but imposes non-negativity and have similar properties to seminorms and semimetrics. Inner correlations utilize a generalization of the notion of inner products to multiple variables by constructing normalized Gram determinants. Agnesian operators make direct use the notions of change as either derivatives or net changes and has applications to the notions of parametric curves and surfaces in finite dimension. Lastly, grade entropies combine elementary notions of information theory and order theory.
+
+With these mathematical notions in mind, in the next chapter we introduce a software package that implements their calculation. 

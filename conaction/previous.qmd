@@ -1,0 +1,104 @@
+# Previous Instantiations of the Trinity of Covariation
+
+Instantiations of the Trinity of Covariation are already ubiquitous in mathematics and the sciences. This chapter provides discussion of some of these instantiations from different areas of mathematics found in the sciences.
+
+## Correlation
+
+"*Correlation*" is an instance of The Trinity of Covariation. It quantifies 'change' in the form of deviations from a mean value of a random variable. It captures a notion of 'structure' in the sense of quantifying something about the joint distribution of two variables. And it captures a notion of 'coordination' in a direct sense of paired values (i.e. points or *coordinates*) whose instances can be specified by an index set.
+
+Francis Galton, one of the important thinkers in the history of correlation, made a statement about his calculations of 'co-relation' of 'variable organs' (given in @fig-galton-quote with his portrait) that echoes the quote on causality from John Stuart Mill given in Section \ref{sec:trinityofcovariation}. Here, Galton is literally referring to biological and physical measurements of organs of the human body @galton1888.
+
+::: {#fig-galton-quote layout-ncol=2}
+
+![Francis Galton (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/e/ec/Francis_Galton_1850s.jpg)
+
+> Two variable organs are said to be co-related when the variation of the one is accompanied on the average by more or less of the other, and in the same direction.
+
+
+Portrait of Francis Galton and a quote from his work on biometrics.
+:::
+
+In this quotation Galton says, "and in the same direction". While most students of statistics today understand the notion of negative correlation, it may have been the case that the properties that Galton studied all had positive correlation. Perhaps he did not notice the possibility of negative correlation. But it is clear from his wording of 'variation of the one is accompanied on the average by more or less of the other' that he is thinking of coordinated change in empirical quantities.
+
+::: {#fig-correlation-figures layout-ncol=3}
+
+![Auguste Bravais (Public Domain) ](https://upload.wikimedia.org/wikipedia/commons/2/28/Bravais2.gif)
+
+![Francis Galton (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/a/ae/Sir_Francis_Galton_by_Charles_Wellington_Furse.jpg)
+
+![Karl Pearson (Public Domain)](https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg)
+
+The historical founders of the intuitive and mathematical notions that led to our modern formulations of correlation.
+:::
+
+The history of correlation is complicated, with many participants that will not be mentioned here. See @fig-correlation-figures for some of them. For a more detailed discussion, see @piovani2007. Correlation began with the study of error theory which endevoured to form a mathematical description of the error of models. This theory of errors led to least-squares analysis, which was pioneered by the rivals Carl Friedrich Gauss and Adrien-Marie Legendre @piovani2007. While generations of undergraduate students have associated correlation with Karl Pearson, he neither developed the first mathematical formulation nor the interpretation of 'co-relation' of variables. Auguste Bravais purportedly was the first to write down a mathematically-equivalent expression to Pearson's correlation coefficient @wright1921, however he did not provide any interpretation of statistical association to his calculations. Rather Bravais was focused on developing joint normal distributions, and what we would now consider to be correlation was only discussed in his work as an angle between residual vectors @bravais1844. It was Francis Galton that found an intuitive interpretation in his own tabular way of computing correlation as 'co-relation' Stigler1989, and it was Karl Pearson (@Pearson1895) who later formalized the product-moment formula that students would recognize today.
+
+
+\begin{equation}
+\text{Corr}\left[ X, Y\right] \triangleq \frac{\mathbb{E}\left[ \left( X - \mathbb{E}\left[ X \right] \right) \left( Y - \mathbb{E}\left[ Y \right] \right) \right]}{\sqrt{\mathbb{E}\left[\left( X - \mathbb{E}\left[ X \right] \right)^2 \right] \mathbb{E}\left[\left( Y - \mathbb{E}\left[ Y \right] \right)^2 \right]}}
+\end{equation}
+
+The $\mathbb{E}$ operator in the above expression denotes the expectation operator, which can be defined as 
+$$\mathbb{E}[X] \triangleq \int_{\Omega} x dF$$
+
+where $X$ is a random variable, $\Omega$ is the set of outcomes for $X$, and $F$ is the cumulative distribution function of $F$.\footnote{It is possible to define the expectation operator in a more general way, but it will suffice for our purposes.} In a sense the expectation operator can be thought of as a kind of weighted average. We will make use of the notion of the expectation multiple times throughout the thesis.
+
+The Pearson correlation coefficient is one of the most used functions in applied statistics, and its numerator $\operatorname{Cov}[X,Y] \triangleq \mathbb{E}\left[ \left( X - \mathbb{E}\left[ X \right] \right) \left( Y - \mathbb{E}\left[ Y \right] \right) \right]$ is the \textit{covariance} of two random variables in the conventional sense. @tbl-pearson-properties lists some of the basic properties of Pearson's correlation coefficient, along with the less-well-known result due @langford2001 that only very strong correlations can be used in a transitive-like way.
+
+| Name | Expression | Comments |
+| --- | --- | --- |
+| Translational invariance | $\text{Corr}\left[ X, Y\right] = \text{Corr}\left[ X + c, Y\right]$ | $c \in \mathbb{R}$ |
+| Absolute Invariance of Scaling | $\text{Corr}\left[ X, Y\right] = \text{Corr}\left[ \alpha X, Y\right]$ | $\alpha \in \mathbb{R}_{>0}$ |
+| Symmetric | $\text{Corr}\left[ X, Y\right] = \text{Corr}\left[ Y, X\right]$ |
+| Bounded | $-1 \leq \text{Corr}\left[ X, Y\right]  \leq 1$ |
+| Dependence Indicator | $\perp\!\!\!\!\perp (X, Y) \implies \text{Corr}\left[ X, Y\right] = 0$ | The converse is not true. |
+| Conditional Transitivity | $\text{Corr}\left[ X, Y\right]^2 + \text{Corr}\left[ Y,Z\right]^2 > 1 \implies \text{Corr}\left[ X, Z\right]^2 > 0$ | @langford2001 |
+| Even Function | $\text{Corr}\left[ X, Y\right] = \text{Corr}\left[ -X, -Y\right]$ |
+| Biased | $\mathbb{E}_{X|\rho}[\hat{\rho} - \rho] \neq 0$ | @Hotelling1953, @Olkin1958|
+: Properties of Pearson's Product-Moment Correlation Coefficient {#tbl-pearson-properties}
+
+::: {.callout-caution collapse="true"}
+## Some Clarifications About Bias
+
+Above we state that correlation is biased, however this has only been shown to be the case for certain families of probability distributions. 
+
+Further, it is important to distinguish between the estimand as the population correlation $\rho$, the estimate $\hat \rho$, and the estimator which assigns an estimate to each sample.
+:::
+
+The notation $\perp\!\!\!\!\perp (X, Y)$ in @tbl-pearson-properties denotes that two random variables are statistically independent. *Statistical independence* is a property of a collection of random variables such that their joint cumulative distribution function is equal to the product of their marginal cumulative distribution functions. The notion of statistical independence will become important in interpreting specific mathematical topics later in this thesis.\\
+
+Another important statistical notion is that of the bias of an estimator. An estimator is function that can be computed on a sample to estimate the value of a population parameter. The notation $\mathbb{E}_{X|\rho}[\hat{\rho} - \rho] \neq 0$ in @tbl-pearson-properties denotes that the average difference across samples between an estimate $\hat{\rho}$ of the parameter population $\rho$ will not equal zero.\\
+
+There exists a generalization of Pearson's correlation coefficient that is also an instantiation of The Trinity of Covariation. It is discussed later in this thesis.
+
+## Cokurtosis, Coskewness, and Other Standardized Mixed-Product Moments
+
+Pearson's product-moment correlation is one of the more famous and historically precedented examples of standardized mixed-product moments. Such functions have the form given in Definition \ref{def:standardmixedproductmoment}, which can be shown to be a generalization of Definition \ref{def:pearsoncorrelation}.\\
+
+\begin{Definition}[mydefinition=Standardized Mixed-Product Moment, label=def:standardmixedproductmoment]
+Given a collection of real-valued random variables $\{X_1, \cdots, X_n \}$, their \underline{standardized mixed-product moment} is given by:
+
+$$K \left[X_1, \cdots, X_n \right] \triangleq \frac{\mathbb{E} \left[ \prod_{j=1}^{n} \left( X_j - \mathbb{E} \left[ X_j \right] \right) \right]}{\prod_{j=1}^{n} \sqrt{\mathbb{E} \left[ \left (X_j - \mathbb{E} \left[ X_j \right] \right)^2 \right]}}$$
+\end{Definition}
+
+When $n=3$ in Definition \ref{def:standardmixedproductmoment} the statistic is called the \textit{coskewness} (@miller2013) of those random variables, while if $n=4$ the statistic is called the \textit{cokurtosis} (@miller2013).
+
+This family of statistics are instances of the Trinity of Covariation in a very similar way in which the Pearson product-moment correlation is through computing expectations of products of deviations from their univariate expectations. One of the new instances presented in this work is similar to these standardized mixed-product moments but involves a different normalization.
+
+## Interaction Effects
+
+Interaction effects are in common usage in the context of linear models. They were motivated by the non-additivity of treatment effects \cite{Cox1984}. In the context of linear models an interaction effect is taken to be the linear regression coefficient of a term called an \textit{interaction term}. An interaction term is a predictor defined by the product of a collection of random variables.
+
+Let us consider an example to clarify the concept. Let $X,Y,Z$ be random variables defined in a linear model to be $Y = \beta_0 + \beta_1 X + \beta_2 Z + \beta_3 X Z$. Here $\beta_0$ is an intercept term, and $\beta_1$ and $\beta_2$ represent the main effects of $X$ and $Z$ on $Y$, respectively.  The interaction term is $\beta_3 XZ$, and the interaction effect is the coefficient $\beta_3$. In other words, an interaction effect is a parameter that specifies how $X$ and $Z$ have a coordinated effect on $Y$.
+
+Interaction effects are not limited to pairs of predictor variables, and different interaction effects can be included in the same model where their distinctiveness is obtained from the choice of variables `interacting'.
+
+## Derivatives and Differential Operators
+
+Perhaps no subject has so thoroughly studied change as that of calculus, and so it is of little surprise that instances of the Trinity of Covariation can be found within it.
+
+The derivative is a central concept to the subject of calculus, and is an instance of the Trinity of Covariation. It describes how one quantity changes whenever a second quantity changes. Not only are these changes coordinated, but are by definition an instantaneous comparison.
+
+In any introductory course in differential calculus, related rates problems are presented to the student. It is sometimes a student's first introduction to applications of both calculus and the chain rule of derivatives. A classic example is that of the leaning ladder, which relates certain rates of change through the Pythagorean theorem. In terms of the metaphor, the structure is the collection of coordinates describing the bottom and top of the ladder with respect to the ground and the wall. The notion of change here is simply the derivatives, and the notion of coordination here comes from the Pythagorean theorem. Via the chain rule of derivatives, we can consider the total derivatives of the quantities of interest.
+
+Beyond the derivative of scalar functions are a variety of differential operators that capture collections of rates of change in a coordinated way. A function with a scalar image might also have a gradient, which describes the partial derivatives with respect to each input. The gradient is a staple of vector calculus, and modern machine learning. The Jacobian matrix is a construction of how one set of scalars change with respect to another set of scalars, which can provide a description of how when a change in coordinate system is performed it can be transformed into a change in another coordinate system. Another operator is the Hessian, which considers all of the second-order partial derivatives of a scalar-imaged function and whose eigenvalue decomposition can inform us of the convexity of a surface. These and many other differential operators extend the applicability and scope of derivatives by considering how comparisons of multiple quantities change together.

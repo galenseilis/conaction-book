@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "ConAction, Second Edition."
+  author: "Galen Seilis"
+  date: "2022-09-16"
+  chapters:
+    - index.qmd
+    - abstract.qmd
+    - intro.qmd
+    - previous.qmd
+    - new.qmd
+    - software.qmd
+    - mtn-pine-beetle.qmd
+    - discussion_conclusions.qmd
+    - references.qmd
+    - citation.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

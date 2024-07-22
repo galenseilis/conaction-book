@@ -1,0 +1,5 @@
+# Abstract
+
+Complexity poses a pervasive challenge in understanding formal and natural systems which can arise from a combination of a system’s state and state transition rules. In situations in which many aspects of a system are changing together, it is desirable to quantify how much they do so. We motivate and define five mathematical functions that can be used to quantify coordinated changes in structure. We also developed ConAction, a Python package which implements these novel mathematical tools in a way that is performant, easy to install, and easy to use. These new tools can be applied to real research problems, which we exemplified by evaluating a classic isolation by distance model for *Dendroctonus ponderosae* populations in western North America.
+
+

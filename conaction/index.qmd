@@ -1,0 +1,27 @@
+# Prefaces {.unnumbered}
+
+## Preface to the First Edition {.unnumbered}
+
+Throughout the writing of this thesis I have received support and assistance that should be acknowledged.
+
+My thanks to Dr. Alex Aravind who initially took me on as a student in 2020. He was instrumental in guiding me in the computer science aspects of this project. While he was my supervisor he always told me to keep going and enjoy the process. I have tried my best to stay true to his advice throughout this thesis.
+
+I must equally thank Dr. Edward Dobrowolski for taking me on as a student in 2021 when Dr. Aravind unexpectedly became unable to continue as my supervisor. His encouragement and guidance have been invaluable in embracing my strengths in this thesis project. I have benefited from his facility with natural languages.
+
+I also thank my committee members Dr. Brent Murray and Dr. Mohammad El Smaily for both encouraging and challenging me. Their ernest enquiries to understand my work have pushed me to think more clearly.
+
+I wish to show gratitude to particular members of the UNBC faculty. I thank Dr. Stephen Rader, Dr. Margot Mandy, and Dr. Alia Hamieh for their advice and support. I thank Dr. Andy Wan for allowing me to sit in on his Mathematics of Machine Learning course, and I thank both Dr. Andy Wan and Dr. Geoffrey McGregor for always supporting my participation in the UNBC Interdisciplinary Weekly Seminar Series as a speaker and as an audience participant.
+
+Thanks is also due to my friends and colleagues in the former Aravind research group including Dylan Fossl, Daniel Kopf, Conan Veitch, and Daniel O'Reilly for their sincerity and support in a confusing loss of Dr. Aravind as a supervisor.
+
+And I thank my others friends who inspired or encouraged me during this thesis including Simon Harris, Amy Jimmo, Catherine Sprangers, Alix Schebel, and Richard Nhan.
+
+Most of all I thank my family including Aaron Seilis, Pat Seilis, Mark Seilis, Flo Dew, and Derwyn Dew for their unwavering support. My grandfather, Derwyn Dew, passed away in January of 2022 due to complications of esophageal cancer. He is loved and missed.
+
+## Preface to the Second Edition {.unnumbered}
+
+This second edition was motived by learning about the existence of the Quarto document preparation system. As an exercise I have migrated my thesis to an online book format. Even after completing my thesis and graduating with a masters in Computer Science, I keep busy learning.
+
+I still feel gratitude to all the people who helped me get this far.
+
+Developing this second edition has also given me the opportunity to address errata in the first edition and add clarifications or additional information.
