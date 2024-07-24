@@ -163,6 +163,9 @@ cython_debug/
 
 # Quarto book build
 conaction/_book/
+*.pdf
+*.html
 
 # vim swap
 *.swp
+
