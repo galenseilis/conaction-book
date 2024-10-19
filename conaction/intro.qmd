@@ -2,32 +2,50 @@
 
 ## Complexity
 
-Defining "complexity" can seem ironic because it turns out to be a 'complex' endeavour. But in this section we will attempt to explain some of its character, and why it is a challenge in the sciences. The complexity of a system generally comes from a combination of two sources: the system's state and the system's state transition rules.\\
+Defining "complexity" can seem ironic because it turns out to be a 'complex' endeavour. But in this section we will attempt to explain some of its character, and why it is a challenge in the sciences. The complexity of a system generally comes from a combination of two sources: the system's state and the system's state transition rules.
 
-Formal systems are structures like sets, sequences, vectors, scalars, matrices, tensors, graphs, hypergraphs, or any of a myriad of algebraic structures or spaces. In the simple case of a set as a system, one can think of the elements of the set as its state along with some rules for changing the elements of the set. Two contrasting examples of formal systems are cellular automata and systems of diffrential equations.\\
+Formal systems are structures like sets, sequences, vectors, scalars, matrices, tensors, graphs, hypergraphs, or any of a myriad of algebraic structures or spaces. In the simple case of a set as a system, one can think of the elements of the set as its state along with some rules for changing the elements of the set. Two contrasting examples of formal systems are cellular automata and systems of diffrential equations.
 
-Figure \ref{fig:statetransitionexample} (a) shows an elementary (1-dimensional) cellular automata known as Rule 110. In such a system the entire state of the system is represented as a one-hot vector (i.e. a vector of zeros and ones). In such a system time can be thought of discretely as a count of the number of applications of the rules, which are applied simultaneously on the current state of the system to get the next state. The state transition rules dictate how a given bit is replaced with another depending on its value as well as the values of its left and right neighbours.  It is possible *prima facie* to believe that such systems are only capable of the simplest of patterns based on the belief that simple rules imply simple behaviour. But this is not so. In 2004 Mathew Cook published a proof that Rule 110 is Turing complete (@cook2004), i.e. equivalent to a Turing machine, a classification indicating that Rule 110 can run any program depending on the size and configuration of its input.\footnote{A system would have to be infinitely-large to be Turing complete. If Rule 110 elementary automata were given an infinitely-large input this would be apt, however it still speaks to the ability of a system to represent complex patterns if it is a finite approximation to a Turing machine.} As a practical point of comparison, a phone or a PC can be entirely represented by a Turing machine. This includes everything from playing your favourite music or video, playing the latest computer games, calling a friend, running advanced scientific simulations, and even representing the entirety of whatever the Internet is doing right at this moment. Thus complexity really **can** come from simple rules with a suitable system configuration.
+@fig-state-transition-example (a) shows an elementary (1-dimensional) cellular automata known as Rule 110. The state transition rules for this system are given below:
 
-Stephen Wolfram has argued that some systems, including those with simple rules and relatively small state spaces, can still be what he calls "\textit{computationally irreducible}"(@wolfram2002). Computational irreducibility is the notion that there exists formal systems in which, even with the current state and the state transition rules on hand, there does not exist a more efficient way of knowing the future state than to run the complete sequence of iterations of the rules. Fortunately, if we consider a well-defined state with state transitions rules at time $t$, we can always (within the practicalities of computation on real computers) compute what the state will be at time $t+\tau$ by iteratively applying the transition rules $\tau$ number of times. Less fortunately, there are systems that have undecidable problems in the sense that they cannot be answered in a finite number of steps.
+$$\{(1,1,1), (1,0,0), (0,0,0)\} \mapsto 0$$
+
+$$\{(1,1,0), (1,0,1), (0,1,1), (0,1,0), (0,0,1)\} \mapsto 1$$
+
+In such a system the entire state of the system is represented as a one-hot vector (i.e. a vector of zeros and ones). In such a system time can be thought of discretely as a count of the number of applications of the rules, which are applied simultaneously on the current state of the system to get the next state. The state transition rules dictate how a given bit is replaced with another depending on its value as well as the values of its left and right neighbours.  It is possible *prima facie* to believe that such systems are only capable of the simplest of patterns based on the belief that simple rules imply simple behaviour. But this is not so. In 2004 Mathew Cook published a proof that Rule 110 is Turing complete (@cook2004), i.e. equivalent to a Turing machine, a classification indicating that Rule 110 can run any program depending on the size and configuration of its input.
+
+::: {.callout-note}
+A system would have to be infinitely-large to be Turing complete. If Rule 110 elementary automata were given an infinitely-large input this would be apt, however it still speaks to the ability of a system to represent complex patterns if it is a finite approximation to a Turing machine.
+:::
+
+As a practical point of comparison, a phone or a PC can be entirely represented by a Turing machine. This includes everything from playing your favourite music or video, playing the latest computer games, calling a friend, running advanced scientific simulations, and even representing the entirety of whatever the Internet is doing right at this moment. Thus complexity really **can** come from simple rules with a suitable system configuration.
+
+Stephen Wolfram has argued that some systems, including those with simple rules and relatively small state spaces, can still be what he calls "*computationally irreducible*"(@wolfram2002). Computational irreducibility is the notion that there exists formal systems in which, even with the current state and the state transition rules on hand, there does not exist a more efficient way of knowing the future state than to run the complete sequence of iterations of the rules. Fortunately, if we consider a well-defined state with state transitions rules at time $t$, we can always (within the practicalities of computation on real computers) compute what the state will be at time $t+\tau$ by iteratively applying the transition rules $\tau$ number of times. Less fortunately, there are systems that have undecidable problems in the sense that they cannot be answered in a finite number of steps.
 
 Discrete (countable) systems are not the only types of formal systems that can be characterized by a current state combined with state transition rules, leading us to the notion of differential equations.
 
-\begin{figure}[H]
-	\begin{center}
-	\begin{tabular}{cc}
-	(a) & (b) \\
-		\includegraphics[scale=0.2]{rule110.png} & \includegraphics[scale=0.2]{lorenzsystem.png}  \\
-		\ccPublicDomain\ Public Domain & \ccPublicDomain\ Public Domain \\
-		\small $\{(1,1,1), (1,0,0), (0,0,0)\} \mapsto 0$ & $\frac{dx}{dt} = \sigma (y-x)$ \\
-		\small $\{(1,1,0), (1,0,1), (0,1,1), (0,1,0), (0,0,1)\} \mapsto 1$ & $\frac{dy}{dt} =x (\rho - z) - y$ \\
-		 & $\frac{dz}{dt} = xy - \beta z$ \\
-	\end{tabular}
-	\end{center}
-	\caption{Examples of systems with a well-defined state with state transition rules. (a) Rule 110 elementary cellular automata. (b) Lorenz dynamical system.}
-	\label{fig:statetransitionexample}
-\end{figure}
+::: {#fig-state-transition-example layout-ncol=2}
 
-Figure \ref{fig:statetransitionexample} (b) shows the Lorenz system, which is a system of differential equations in 3 dimensions that was originally inspired by weather models \cite{Lorenz1963}. A *dynamical system* has a formal definition, but we will treat it informally here as a system that evolves with time according to differential equations. Like the example with elementary cellular automata, there is a well-defined state at any given point in time. But unlike these discrete state space systems, the Lorenz system has a continuous state space. This has the non-intuitive consequence that there is no "next state", however a collection of governing equations prescribe how the system evolves through the space of states. The Lorenz system exhibits a different notion of complexity: chaos. Chaos can informally be defined as the state of the system at some future time being highly sensitive to the initial conditions that the system began with, however this may understate the severity of the sensitivity. There exists systems for which *any* finite precision in the measurements of the state of the system will eventually be insufficient to predict future states after a finite amount of time. This is not the same thing as randomness *per se* because the underlying dynamics are deterministic. Rather this is extrinsic randomness due to not knowing the state of the system in enough detail.\footnote{The only systems that might be intrinsically random are those described by wave functions in quantum mechanics, however even this inference has doubts that have been raised by @Hossenfelder2020a, @Hossenfelder2020b, and @Hooft2014.}
+![Rule 110 elementary cellular automata](https://upload.wikimedia.org/wikipedia/commons/2/2b/Sample_run_of_Rule_110_elementary_cellular_automaton%2C_starting_from_single_cell.png)
+
+![Lorenz dynamical system](https://upload.wikimedia.org/wikipedia/commons/7/71/Lorenz_system_r28_s10_b2-6666.png)
+
+
+Examples of systems with a well-defined state with state transition rules.
+:::
+
+@fig-state-transition-example (b) shows the Lorenz system, which is a system of differential equations in 3 dimensions that was originally inspired by weather models (@Lorenz1963). Here are the relevant rate equations: 
+
+$$\frac{dx}{dt} = \sigma (y-x)$$
+$$\frac{dy}{dt} =x (\rho - z) - y$$
+
+$$\frac{dz}{dt} = xy - \beta z$$
+
+A *dynamical system* has a formal definition, but we will treat it informally here as a system that evolves with time according to differential equations. Like the example with elementary cellular automata, there is a well-defined state at any given point in time. But unlike these discrete state space systems, the Lorenz system has a continuous state space. This has the non-intuitive consequence that there is no "next state", however a collection of governing equations prescribe how the system evolves through the space of states. The Lorenz system exhibits a different notion of complexity: chaos. Chaos can informally be defined as the state of the system at some future time being highly sensitive to the initial conditions that the system began with, however this may understate the severity of the sensitivity. There exists systems for which *any* finite precision in the measurements of the state of the system will eventually be insufficient to predict future states after a finite amount of time. This is not the same thing as randomness *per se* because the underlying dynamics are deterministic. Rather this is extrinsic randomness due to not knowing the state of the system in enough detail.
+
+::: {.callout-note}
+The only systems that might be intrinsically random are those described by wave functions in quantum mechanics, however even this inference has doubts that have been raised by @Hossenfelder2020a, @Hossenfelder2020b, and @Hooft2014.
+:::
 
 While we often model natural systems using formal systems, they are not synonymous. Therefore it worth exemplifying some natural systems. We will describe some natural systems in which complexity makes scientific progress difficult.
 
@@ -45,16 +63,25 @@ What is true of both formal and natural systems is that complexity arises from a
 
 In the analysis of data we look for how observables vary on their own, and how they vary together. Figure \ref{fig:dancing} offers a metaphor for this by relating dancers to variables. In univariate statistics we are concerned with how a single variable changes or distributes on its own. In bivariate statistics we are concerned with how pairs of variables covary. Likewise, for any number of putatively dependent variables we can consider how they covary, which is one of the goals of multivariate statistics.
 
+::: {layout-ncol-2}
+
+![A single dancer as a univariate system](https://upload.wikimedia.org/wikipedia/commons/4/4a/Nandini_Ghosal.jpg)
+
+![Two dancers as a bivariate system](https://upload.wikimedia.org/wikipedia/commons/4/4a/Nandini_Ghosal.jpg)
+
+'Dancing variables' is a metaphor relating statistical variables to dancers.
+:::
+
 \begin{figure}[H]
 		\begin{center}
 			\begin{tabular}{ccc}
 			(a) & (b) & (c) \\
 			\includegraphics[scale=0.65]{singledancer.jpg} & \includegraphics[scale=0.13]{twodancers.jpeg} & \includegraphics[scale=0.181]{threedancers.jpg} \\
-	\tiny \href{https://en.wikipedia.org/wiki/File:Nandini\_Ghosal.jpg}{CC-BY-SA-2.0} & \tiny \href{https://en.wikipedia.org/wiki/File:NutcrackerSnowPas.JPG}{CC-BY-SA-4.0} & \tiny \href{https://en.wikipedia.org/wiki/File:Irish\_dancers\_in\_team\_costume,\_Davis\_Academy,\_USA.jpg}{\ccPublicDomain\ Public Domain} \\
+	\tiny \href{}{CC-BY-SA-2.0} & \tiny \href{}{CC-BY-SA-4.0} & \tiny \href{https://en.wikipedia.org/wiki/File:Irish\_dancers\_in\_team\_costume,\_Davis\_Academy,\_USA.jpg}{\ccPublicDomain\ Public Domain} \\
 	\tiny  \href{https://www.flickr.com/people/43518209@N00}{Bala Sivakumar} & \tiny \href{https://en.wikipedia.org/wiki/User:Lambtron}{Jim Lamberson $|$ Wikimedia Commons} &  \\
 			\end{tabular}
 		\end{center}
-	\caption{'Dancing variables' is a metaphor relating statistical variables to dancers. (a) A single dancer as a univariate system. (b) Two dancers as a bivariate system. (c) Three dancers as a trivariate system.}
+	\caption{ (a) A single dancer as a univariate system. (b) Two dancers as a bivariate system. (c) Three dancers as a trivariate system.}
 	\label{fig:dancing}
 \end{figure}
 
